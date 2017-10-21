@@ -1,0 +1,125 @@
+/*
+
+Vivado v2016.2 (64-bit)
+SW Build 1577090 on Thu Jun  2 16:32:40 MDT 2016
+Process ID: 7588
+
+Current time: 	10/20/17 5:18:41 PM PDT
+Time zone: 	Pacific Standard Time (America/Los_Angeles)
+
+OS: Windows 10
+Version: 10.0
+Architecture: amd64
+Available processors (cores): 4
+
+Screen size: 1280x720
+Screen resolution (DPI): 96
+Available screens: 1
+Default font: family=Tahoma,name=Tahoma,style=plain,size=11
+
+Java version: 	1.8.0_66 64-bit
+Java home: 	C:/Xilinx/Vivado/2016.2/tps/win64/jre
+
+User name: 	Donald
+User home directory: C:/Users/Donald
+User working directory: C:/Users/Donald/Documents/experiment08
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI Base root directory: C:/Xilinx/Vivado
+RDI Data directory: C:/Xilinx/Vivado/2016.2/data
+RDI Bin directory: C:/Xilinx/Vivado/2016.2/bin
+
+Vivado preferences path: C:/Users/Donald/AppData/Roaming/Xilinx/Vivado/2016.2/vivado.ini
+Vivado layouts directory: C:/Users/Donald/AppData/Roaming/Xilinx/Vivado/2016.2/layouts
+
+GUI allocated memory:	200 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 462 MB
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bL:g (cv:JFrame):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\Donald\Documents\experiment08\experiment08.xpr. Version: Vivado v2016.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project C:/Users/Donald/Documents/experiment08/experiment08.xpr 
+// Tcl Message: open_project C:/Users/Donald/Documents/experiment08/experiment08.xpr 
+// Tcl Message: INFO: [Project 1-313] Project file moved from 'C:/Users/eclai/Desktop/cpe 233/experiment08' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// [GUI Memory]: 39 MB (+38285kb) [00:00:05]
+// [Engine Memory]: 424 MB (+292706kb) [00:00:05]
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 51 MB (+10559kb) [00:00:06]
+// [GUI Memory]: 56 MB (+3008kb) [00:00:06]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 462 MB (+18409kb) [00:00:07]
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2016.2/data/ip'. 
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 490 MB. GUI used memory: 29 MB. Current time: 10/20/17 5:18:41 PM PDT
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// [Engine Memory]: 490 MB (+4916kb) [00:00:08]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Project name: experiment08; location: C:/Users/Donald/Documents/experiment08; part: xc7a35tcpg236-1
+// Tcl Message: open_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:06 . Memory (MB): peak = 763.914 ; gain = 113.656 
+dismissDialog("Open Project"); // bL:g (cv:JFrame)
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// Tcl Message: update_compile_order -fileset sources_1 
+maximizeFrame(PAResourceOtoP.PAViews_SOURCES, "Sources"); // ao:DockableFrame (FrameContainer:JideTabbedPane, cv:JFrame)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, ScratchRAMTestBench - behavior (Scratch_RAM_tb.vhd)]", 2); // z:k (G:JPanel, cv:JFrame)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, testbench - behavior (testbench.vhd)]", 4); // z:k (G:JPanel, cv:JFrame)
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, testbench - behavior (testbench.vhd), uut - RAT_CPU - Behavioral (RATCPU.vhd)]", 5); // z:k (G:JPanel, cv:JFrame)
+// PAPropertyPanels.initPanels (ControlUnit.vhd) elapsed time: 0.2s
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, testbench - behavior (testbench.vhd), uut - RAT_CPU - Behavioral (RATCPU.vhd), my_cu - CONTROL_UNIT - Behavioral (ControlUnit.vhd)]", 11, false); // z:k (G:JPanel, cv:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, testbench - behavior (testbench.vhd), uut - RAT_CPU - Behavioral (RATCPU.vhd), my_cu - CONTROL_UNIT - Behavioral (ControlUnit.vhd)]", 11, false, false, false, false, false, true); // z:k (G:JPanel, cv:JFrame) - Double Click
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ControlUnit.vhd", 1); // TdiGroup:JideTabbedPane (CodeEditorDocumentPane:DocumentPane, cv:JFrame)
+selectTab((HResource) null, "PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "ControlUnit.vhd", 1, false, true); // TdiGroup:JideTabbedPane (CodeEditorDocumentPane:DocumentPane, cv:JFrame) - Double Click
+maximizeView(PAResourceOtoP.PAViews_BASE_WORKSPACE, "BaseWorkspace"); // V:a (Workspace:JPanel, cv:JFrame)
+// Elapsed time: 593 seconds
+selectCodeEditor("ControlUnit.vhd", 422, 329); // bH:N (JPanel:JComponent, cv:JFrame)
+typeControlKey((HResource) null, "ControlUnit.vhd", 'c'); // bH:N (JPanel:JComponent, cv:JFrame)
+typeControlKey((HResource) null, "ControlUnit.vhd", 'v'); // bH:N (JPanel:JComponent, cv:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// [GUI Memory]: 61 MB (+1582kb) [00:10:38]
+// HMemoryUtils.trashcanNow. Engine heap size: 510 MB. GUI used memory: 31 MB. Current time: 10/20/17 5:29:52 PM PDT
+// Elapsed time: 131 seconds
+selectCodeEditor("ControlUnit.vhd", 238, 350); // bH:N (JPanel:JComponent, cv:JFrame)
+// Elapsed time: 17 seconds
+selectCodeEditor("ControlUnit.vhd", 416, 362); // bH:N (JPanel:JComponent, cv:JFrame)
+// [GUI Memory]: 64 MB (+713kb) [00:13:01]
+typeControlKey((HResource) null, "ControlUnit.vhd", 'v'); // bH:N (JPanel:JComponent, cv:JFrame)
+selectCodeEditor("ControlUnit.vhd", 208, 242); // bH:N (JPanel:JComponent, cv:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// Elapsed time: 34 seconds
+selectCodeEditor("ControlUnit.vhd", 331, 385); // bH:N (JPanel:JComponent, cv:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
