@@ -99,8 +99,7 @@ begin
     --AND    
     when "0101" =>
         v_out :=  A and B;
-        s_c <= '0';
-
+        
         if(v_out = x"00") then
             s_z <= '1';
         else
@@ -112,7 +111,6 @@ begin
     --OR    
     when "0110" => 
         v_out := A or B;        
-        s_c <= '0';
 
         if(v_out = x"00") then
             s_z <= '1';
@@ -125,7 +123,6 @@ begin
     --EXOR    
     when "0111" => 
         v_out := A xor B;
-        s_c <= '0';
 
         if(v_out = x"00") then
             s_z <= '1';
@@ -138,7 +135,6 @@ begin
     --TEST    
     when "1000" => 
         v_out := A and B;
-        s_c <= '0';
 
         if(v_out = x"00") then
             s_z <= '1';
