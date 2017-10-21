@@ -61,16 +61,17 @@ architecture Behavioral of RAT_CPU is
               PC_INC        : out  STD_LOGIC;
               PC_RST      : out  STD_LOGIC;
               PC_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
-              --SP_LD         : out  STD_LOGIC;
-              --SP_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
-              --SP_RESET      : out  STD_LOGIC;
+              SP_LD         : out  STD_LOGIC;
+              SP_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              SP_RESET      : out  STD_LOGIC;
               RF_WR         : out  STD_LOGIC;
               RF_WR_SEL     : out  STD_LOGIC_VECTOR (1 downto 0);
               alu_opy_SEL : out  STD_LOGIC;
               ALU_SEL       : out  STD_LOGIC_VECTOR (3 downto 0);
               SCR_WR        : out  STD_LOGIC;
               SCR_ADDR_SEL  : out  STD_LOGIC;
-              --C_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              SCR_DATA_SEL  : out  STD_LOGIC;
+              C_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
               FLAG_C_LD     : out  STD_LOGIC;
               FLAG_C_SET    : out  STD_LOGIC;
               FLAG_C_CLR    : out  STD_LOGIC;
@@ -112,7 +113,6 @@ architecture Behavioral of RAT_CPU is
               DY_OUT : out    STD_LOGIC_VECTOR (7 downto 0);
               ADRX   : in     STD_LOGIC_VECTOR (4 downto 0);
               ADRY   : in     STD_LOGIC_VECTOR (4 downto 0);
-              --DX_OE  : in     STD_LOGIC;
               WE     : in     STD_LOGIC;
               CLK    : in     STD_LOGIC);
    end component;
@@ -282,9 +282,9 @@ begin
               --REG_IMMED_SEL => s_reg_immed_sel, 
               ALU_SEL       => s_alu_Sel, 
               alu_opy_sel   => s_alu_opy_sel,
-              SCR_WR        => s_scr_We, 
-              --SCR_OE        => , 
+              SCR_WR        => s_scr_We,  
               SCR_ADDR_SEL  => s_scr_addr_sel, 
+              SCR_DATA_SEL  => s_scr_data_sel,
               --C_FLAG_SEL    => , 
               FLAG_C_LD     => s_flg_c_ld, 
               FLAG_C_SET    => s_flg_c_set, 
