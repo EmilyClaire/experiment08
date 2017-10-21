@@ -1,0 +1,50 @@
+AddC 
+	reg reg
+	reg imm
+And
+	reg reg
+	reg imm
+ASR
+BRCC
+BRCS
+BREQ
+BRN    1
+BRNE
+Call
+CLC
+CMP
+	reg reg
+	reg imm
+Exor 	1
+IN		
+LD
+	reg reg
+	reg imm
+LSL
+LSR
+Mov		1
+	reg reg 1
+	reg imm 1
+Or
+	reg reg
+	reg imm
+Out		1 
+Pop
+Push
+Ret
+Rol
+Ror
+SEC
+ST
+	reg reg
+	reg imm
+Sub
+	reg reg
+	reg imm
+SubC
+	reg reg
+	reg imm
+Test
+	reg reg
+	reg imm
+WSP
