@@ -27,9 +27,9 @@ entity CONTROL_UNIT is
 		   PC_INC        : out  STD_LOGIC;
            PC_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
 		   
-           --SP_LD         : out  STD_LOGIC;
-		   --SP_INCR       : out  STD_LOGIC;
-		   --SP_DECR       : out  STD_LOGIC;
+           SP_LD         : out  STD_LOGIC;
+		   SP_INCR       : out  STD_LOGIC;
+		   SP_DECR       : out  STD_LOGIC;
 
            RF_WR         : out  STD_LOGIC;
 		   RF_WR_SEL     : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -62,7 +62,8 @@ architecture Behavioral of CONTROL_UNIT is
 
    type state_type is (ST_init, ST_fet, ST_exec);
       signal PS,NS : state_type;
-		
+	
+	
 	signal sig_OPCODE_7: std_logic_vector (6 downto 0);
 begin
    -- concatenate the all opcodes into a 7-bit complete opcode for
@@ -92,11 +93,11 @@ begin
     PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 	PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
---	SP_LD          <= '0';
+	SP_LD          <= '0';
                                   FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-	--SP_INCR        <= '0';
+	SP_INCR        <= '0';
 	     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-	--SP_DECR        <= '0';
+	SP_DECR        <= '0';
 	     SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0'; 
 	                                                           
 	IO_STRB        <= '0';     PC_RST            <= '0'; 
@@ -129,17 +130,50 @@ begin
 				PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 				PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 				                           ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
---				SP_LD          <= '0'; 
+				SP_LD          <= '0'; 
                                  FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-				--SP_INCR        <= '0'; 
+				SP_INCR        <= '0'; 
 				    SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-                --SP_DECR        <= '0';
+                SP_DECR        <= '0';
                      SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                       
                 IO_STRB        <= '0';     PC_RST            <= '0'; 
 	
 				
-				case sig_OPCODE_7 is			
+				case sig_OPCODE_7 is	
+				
+		
+					-- ADD R-imm -------------------
+           when "0000100" =>   
+           
+            PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
+           PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
+           PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';
+                                      ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
+           SP_LD          <= '0';   
+                           FLAG_Z_LD      <= '1';     FLAG_SHAD_LD   <= '0';
+           SP_INCR        <= '0';     
+           SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+           SP_DECR        <= '0';   
+           SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
+                                                                                 
+           IO_STRB        <= '0';     PC_RST            <= '0'; 
+           
+           
+					-- ADD R-R -------------------
+  when "0000100" =>   
+  
+  PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
+  PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
+  PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
+                             ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
+  SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';
+  SP_INCR        <= '0';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+  SP_DECR        <= '0';     SCR_ADDR_SEL   <= '0';       FLAG_Z_CLR     <= '0';                 
+                                                                        
+  IO_STRB        <= '0';     PC_RST            <= '0'; 
+		
+						
 					-- BRN -------------------
                when "0010000" =>   
                
@@ -147,27 +181,27 @@ begin
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                           ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
---               SP_LD          <= '0';   
+               SP_LD          <= '0';   
                                FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-               --SP_INCR        <= '0';     
+               SP_INCR        <= '0';     
                SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-               --SP_DECR        <= '0';   
-                 SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
+               SP_DECR        <= '0';   
+               SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '0';     PC_RST            <= '0'; 
 
 					-- EXOR reg-reg  --------
                when "0000010" =>					
-				PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
+			   PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '1';
                                           ALU_SEL        <= "0111";                               FLAG_LD_SEL    <= '0';
-               --SP_LD          <= '0';
+               SP_LD          <= '0';
                                                  FLAG_Z_LD      <= '1';     FLAG_SHAD_LD   <= '0';
-               --SP_INCR        <= '0'; 
-                   SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-               --SP_DECR        <= '0';
-                    SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
+               SP_INCR        <= '0'; 
+               SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+               SP_DECR        <= '0';
+               SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '0';     PC_RST            <= '0'; 
                
@@ -175,16 +209,16 @@ begin
 					-- EXOR reg-immed  ------
                when "1001000" | "1001001" | "1001010" | "1001011" =>					
 
-				PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
+			   PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '1';
                                           ALU_SEL        <= "0111";                               FLAG_LD_SEL    <= '0';
-               --SP_LD          <= '0'; 
+               SP_LD          <= '0'; 
                                                 FLAG_Z_LD      <= '1';     FLAG_SHAD_LD   <= '0';
-               --SP_INCR        <= '0';  
-                  SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-               --SP_DECR        <= '0';   
-                 SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
+               SP_INCR        <= '0';  
+               SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+               SP_DECR        <= '0';   
+               SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '0';     PC_RST            <= '0'; 
 
@@ -196,11 +230,11 @@ begin
                PC_INC         <= '0';     RF_WR_SEL      <= "11";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                           ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
-               --SP_LD          <= '0';     
+               SP_LD          <= '0';     
                                             FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-              -- SP_INCR        <= '0';  
+               SP_INCR        <= '0';  
                  SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-               --SP_DECR        <= '0';
+               SP_DECR        <= '0';
                     SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '0';     PC_RST            <= '0'; 
@@ -213,12 +247,12 @@ begin
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                           ALU_SEL        <= "1110";                               FLAG_LD_SEL    <= '0';
-              -- SP_LD          <= '0';   
+               SP_LD          <= '0';   
                                              FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-              -- SP_INCR        <= '0'; 
-                  SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-              -- SP_DECR        <= '0';
-                   SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
+               SP_INCR        <= '0'; 
+               SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+               SP_DECR        <= '0';
+               SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '0';     PC_RST            <= '0'; 
 
@@ -232,11 +266,11 @@ begin
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';
                                           ALU_SEL        <= "1110";                               FLAG_LD_SEL    <= '0';
-              -- SP_LD          <= '0';    
+               SP_LD          <= '0';    
                                             FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-              -- SP_INCR        <= '0'; 
+               SP_INCR        <= '0'; 
                   SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-              -- SP_DECR        <= '0'; 
+               SP_DECR        <= '0'; 
                   SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '0';     PC_RST            <= '0'; 
@@ -249,11 +283,11 @@ begin
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                           ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
-              -- SP_LD          <= '0';    
+               SP_LD          <= '0';    
                                             FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-              -- SP_INCR        <= '0';  
+               SP_INCR        <= '0';  
                  SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-              -- SP_DECR        <= '0';  
+               SP_DECR        <= '0';  
                  SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                      
                IO_STRB        <= '1';     PC_RST            <= '0'; 
@@ -268,11 +302,11 @@ begin
 				  PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 				  PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 				                             ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
-			--	  SP_LD          <= '0';
+				  SP_LD          <= '0';
 			                                  FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-			--	  SP_INCR        <= '0';  
+				  SP_INCR        <= '0';  
 			   SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-			--	  SP_DECR        <= '0'; 
+				  SP_DECR        <= '0'; 
 			    SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
 				                                                                        
 				  IO_STRB        <= '0';     PC_RST            <= '0'; 
@@ -289,11 +323,11 @@ begin
             PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
             PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                        ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
-            --SP_LD          <= '0';     
+            SP_LD          <= '0';     
                                          FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '0';
-            --SP_INCR        <= '0';  
+            SP_INCR        <= '0';  
                SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-            --SP_DECR        <= '0'; 
+            SP_DECR        <= '0'; 
                 SCR_ADDR_SEL   <= '0';      FLAG_Z_CLR     <= '0';                 
                                                                                   
             IO_STRB        <= '0';     PC_RST            <= '0'; 
