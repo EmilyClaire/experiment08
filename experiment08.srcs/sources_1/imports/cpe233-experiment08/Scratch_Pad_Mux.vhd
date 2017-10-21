@@ -32,25 +32,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity SCR_MUX is
-  Port (SY : in std_logic_vector(7 downto 0);
-        IR : in std_logic_vector(7 downto 0);
-        SCR_ADDR_SEL : in std_logic;
+  Port (SY          : in std_logic_vector(7 downto 0);
+        IR          : in std_logic_vector(7 downto 0);
+        SP_OUT      : in std_logic_vector(7 downto 0);
+        SP_OUT_DECR : in std_logic_vector(7 downto 0);
+        SCR_ADDR_SEL : in std_logic_vector (1 downto 0);
         SCR_Output : out std_logic_vector (7 downto 0));
 end SCR_MUX;
 
 architecture Behavioral of SCR_MUX is
 
 begin 
-process(SY, IR, SCR_ADDR_SEL)
+process(SY, IR, SP_OUT, SP_OUT_DECR, SCR_ADDR_SEL)
 variable temp_SCR : std_logic_vector(7 downto 0) := x"00";
 Begin
 
-    if(SCR_ADDR_SEL = '0')then
+    if(SCR_ADDR_SEL = "00")then
         temp_SCR := SY;
-    end if;
-
-    if(SCR_ADDR_SEL = '1')then
+    elsif(SCR_ADDR_SEL = "01")then
         temp_SCR := IR;
+    elsif(SCR_ADDR_SEL = "10") then
+        temp_SCR := SP_OUT;
+    else
+        temp_SCR := SP_OUT_DECR;
     end if;
     
 SCR_Output <= temp_SCR; 
