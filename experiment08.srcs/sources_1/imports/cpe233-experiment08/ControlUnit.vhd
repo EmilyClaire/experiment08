@@ -460,6 +460,53 @@ IO_STRB        <= '0';     PC_RST         <= '0'; 	    SCR_DATA_SEL   <= '0';
 
 
 
+
+    					-- OR R-Imm  -------------------
+when "1000100" | "1000101" | "1000110" | "1000111" =>   
+
+
+
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';     PC_LD          <= '0';
+PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
+PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "0110"; 
+SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
+SP_INCR        <= '0';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+SP_DECR        <= '0';     SCR_ADDR_SEL   <= "00";      FLAG_Z_CLR     <= '0';                                                          
+IO_STRB        <= '0';     PC_RST         <= '0'; 	    SCR_DATA_SEL   <= '0';
+
+
+
+
+
+    					-- POP  -------------------
+when "01000110" =>   
+
+
+
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';     PC_LD          <= '0';
+PC_INC         <= '0';     RF_WR_SEL      <= "01";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
+PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
+SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
+SP_INCR        <= '1';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+SP_DECR        <= '0';     SCR_ADDR_SEL   <= "11";      FLAG_Z_CLR     <= '0';                                                          
+IO_STRB        <= '0';     PC_RST         <= '0'; 	    SCR_DATA_SEL   <= '0';
+
+
+
+    					-- PUSH  -------------------
+when "01000101" =>   
+
+
+
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';     PC_LD          <= '0';
+PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
+PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
+SP_LD          <= '1';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
+SP_INCR        <= '0';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+SP_DECR        <= '1';     SCR_ADDR_SEL   <= "00";      FLAG_Z_CLR     <= '0';                                                          
+IO_STRB        <= '0';     PC_RST         <= '0'; 	    SCR_DATA_SEL   <= '0';
+
+
 						
 					-- BRN -------------------
                when "0010000" =>   
