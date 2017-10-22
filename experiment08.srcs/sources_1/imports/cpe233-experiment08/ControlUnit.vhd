@@ -256,6 +256,23 @@ IO_STRB        <= '0';     PC_RST         <= '0';
 
 
 
+    					-- BRCS  -------------------
+when "0010100" =>   
+
+if (C_FLAG = '1') then
+    PC_LD <= '1';
+else
+    PC_LD <= '0';
+end if;
+
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';
+PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
+PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
+SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
+SP_INCR        <= '0';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
+SP_DECR        <= '0';     SCR_ADDR_SEL   <= '0';       FLAG_Z_CLR     <= '0';                                                          
+IO_STRB        <= '0';     PC_RST         <= '0'; 	
+
 						
 					-- BRN -------------------
                when "0010000" =>   
