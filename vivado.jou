@@ -9,3 +9,27 @@
 # Log file: C:/Users/Donald/Documents/experiment08/vivado.log
 # Journal file: C:/Users/Donald/Documents/experiment08\vivado.jou
 #-----------------------------------------------------------
+start_gui
+open_project C:/Users/Donald/Documents/experiment08/experiment08.xpr
+update_compile_order -fileset sources_1
+file mkdir C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new
+close [ open C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/ScratchPAD.vhd w ]
+add_files C:/Users/Donald/Documents/experiment08/experiment08.srcs/sources_1/new/ScratchPAD.vhd
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top RAT_CPU [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top RAT_wrapper [get_filesets sim_1]
+set_property top_lib xil_defaultlib [get_filesets sim_1]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation

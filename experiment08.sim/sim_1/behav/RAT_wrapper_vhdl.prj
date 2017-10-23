@@ -1,0 +1,22 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/pc.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/mux.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/new/ScratchPAD.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/Stack_Pointer.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/ALU.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/Scratch_Pad_Mux.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/reg_mux.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/prog_rom.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/ControlUnit.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/ALU_MUX.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/RegisterFile.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/int_input.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/scr_data_mux.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/Flag_Reg_z.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/Flag_Reg_c.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/program_counter.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/RATCPU.vhd"
+vhdl xil_defaultlib  "../../../experiment08.srcs/sources_1/imports/cpe233-experiment08/RatCPUWrapper.vhd"
+
+# Do not sort compile order
+nosort

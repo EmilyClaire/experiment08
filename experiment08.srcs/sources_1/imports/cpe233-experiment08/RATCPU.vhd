@@ -51,7 +51,7 @@ architecture Behavioral of RAT_CPU is
     
     
     component SCR_DATA_MUX is
-      Port (DX : in std_logic_vector(9 downto 0);
+      Port (DX : in std_logic_vector(7 downto 0);
             PC_COUNT : in std_logic_vector(9 downto 0);
             SCR_DATA_SEL : in std_logic;
             DATA_IN : out std_logic_vector (9 downto 0));
@@ -61,52 +61,54 @@ architecture Behavioral of RAT_CPU is
 
    component CONTROL_UNIT
        Port ( CLK           : in   STD_LOGIC;
-              C_flag        : in   STD_LOGIC;
-              Z_flag        : in   STD_LOGIC;
+              C_FLAG        : in   STD_LOGIC;
+              Z_FLAG        : in   STD_LOGIC;
               INT           : in   STD_LOGIC;
               RESET         : in   STD_LOGIC;
               OPCODE_HI_5   : in   STD_LOGIC_VECTOR (4 downto 0);
               OPCODE_LO_2   : in   STD_LOGIC_VECTOR (1 downto 0);
-              
+                 
+              PC_RST           : out  STD_LOGIC;
               PC_LD         : out  STD_LOGIC;
               PC_INC        : out  STD_LOGIC;
-              PC_RST        : out  STD_LOGIC;
               PC_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
               
               SP_LD         : out  STD_LOGIC;
-              --SP_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
               SP_INCR       : out  STD_LOGIC;
               SP_DECR       : out  STD_LOGIC;
-              SP_RESET      : out  STD_LOGIC;
-              
+   
               RF_WR         : out  STD_LOGIC;
               RF_WR_SEL     : out  STD_LOGIC_VECTOR (1 downto 0);
-              
-              alu_opy_SEL   : out  STD_LOGIC;
+   
+              ALU_OPY_SEL   : out  STD_LOGIC;
               ALU_SEL       : out  STD_LOGIC_VECTOR (3 downto 0);
               
               SCR_WR        : out  STD_LOGIC;
               SCR_ADDR_SEL  : out  STD_LOGIC_VECTOR (1 downto 0);
               SCR_DATA_SEL  : out  STD_LOGIC;
               
-              C_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              FLAG_LD_SEL   : out  STD_LOGIC;
+              FLAG_SHAD_LD  : out  STD_LOGIC;
+              
               FLAG_C_LD     : out  STD_LOGIC;
               FLAG_C_SET    : out  STD_LOGIC;
               FLAG_C_CLR    : out  STD_LOGIC;
-              --SHAD_C_LD     : out  STD_LOGIC;
-              --Z_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              
               FLAG_Z_LD     : out  STD_LOGIC;
-              --SHAD_Z_LD     : out  STD_LOGIC;
+              FLAG_Z_SET    : out  STD_LOGIC;
+              FLAG_Z_CLR    : out  STD_LOGIC;
               
               I_FLAG_SET    : out  STD_LOGIC;
               I_FLAG_CLR    : out  STD_LOGIC;
+              I_SET         : out  STD_LOGIC;
+              I_CLR         : out  STD_LOGIC;
               IO_STRB       : out  STD_LOGIC);
    end component;
    
    component reg_mux 
      Port (    RF_WR_SEL : in std_logic_vector(1 downto 0);
                IN_PORT   : in std_logic_vector(7 downto 0);
-               --SP_DATA   : in std_logic_vector(7 downto 0);
+               SP_DATA   : in std_logic_vector(7 downto 0);
                ALU_RESULT: in std_logic_vector(7 downto 0);
                SCR_DATA  : in std_logic_vector (7 downto 0);
                DIN       : out std_logic_vector (7 downto 0));
@@ -217,7 +219,7 @@ component int_input
    signal s_c_flag : std_logic;
    signal s_z_flag : std_logic;
    
-   signal s_dx_mux_in : std_logic_vector (9 downto 0):= "00" & s_dx_out;
+   signal s_dx_mux_in : std_logic_vector (7 downto 0):= s_dx_out;
    
    signal s_from_immed : std_logic_vector (9 downto 0) := "1111111111";
    
@@ -280,7 +282,7 @@ begin
    my_reg_mux : reg_mux 
      port map (RF_WR_SEL  => s_rf_wr_sel ,
                IN_PORT    => IN_PORT,
-               --SP_DATA    => s_scr_dout (9 downto 0),
+               SP_DATA    => s_sp_data_out,
                ALU_RESULT => s_alu_result,
                SCR_DATA   => s_rf_mux_scr,
                DIN        => s_rf_din);
