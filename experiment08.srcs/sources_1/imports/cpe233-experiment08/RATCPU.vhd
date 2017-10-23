@@ -14,6 +14,17 @@ end RAT_CPU;
 
 architecture Behavioral of RAT_CPU is
 
+
+    component Stack_Pointer is
+  port (RST : in std_logic;
+        LD : in std_logic;
+        INCR : in std_logic;
+        DECR : in std_logic;
+        CLK :in std_logic;
+        DATA : in std_logic_vector (7 downto 0);
+        SP_OUT : out std_logic_vector (7 downto 0));
+    end component;
+
    component prog_rom  
       port ( ADDRESS : in std_logic_vector(9 downto 0); 
              INSTRUCTION : out std_logic_vector(17 downto 0); 
@@ -50,27 +61,34 @@ architecture Behavioral of RAT_CPU is
 
    component CONTROL_UNIT
        Port ( CLK           : in   STD_LOGIC;
-              C_flag             : in   STD_LOGIC;
-              Z_flag             : in   STD_LOGIC;
+              C_flag        : in   STD_LOGIC;
+              Z_flag        : in   STD_LOGIC;
               INT           : in   STD_LOGIC;
-              RESET           : in   STD_LOGIC;
+              RESET         : in   STD_LOGIC;
               OPCODE_HI_5   : in   STD_LOGIC_VECTOR (4 downto 0);
               OPCODE_LO_2   : in   STD_LOGIC_VECTOR (1 downto 0);
               
               PC_LD         : out  STD_LOGIC;
               PC_INC        : out  STD_LOGIC;
-              PC_RST      : out  STD_LOGIC;
+              PC_RST        : out  STD_LOGIC;
               PC_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              
               SP_LD         : out  STD_LOGIC;
-              SP_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              --SP_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
+              SP_INCR       : out  STD_LOGIC;
+              SP_DECR       : out  STD_LOGIC;
               SP_RESET      : out  STD_LOGIC;
+              
               RF_WR         : out  STD_LOGIC;
               RF_WR_SEL     : out  STD_LOGIC_VECTOR (1 downto 0);
-              alu_opy_SEL : out  STD_LOGIC;
+              
+              alu_opy_SEL   : out  STD_LOGIC;
               ALU_SEL       : out  STD_LOGIC_VECTOR (3 downto 0);
+              
               SCR_WR        : out  STD_LOGIC;
               SCR_ADDR_SEL  : out  STD_LOGIC;
               SCR_DATA_SEL  : out  STD_LOGIC;
+              
               C_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
               FLAG_C_LD     : out  STD_LOGIC;
               FLAG_C_SET    : out  STD_LOGIC;
@@ -79,6 +97,7 @@ architecture Behavioral of RAT_CPU is
               --Z_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
               FLAG_Z_LD     : out  STD_LOGIC;
               --SHAD_Z_LD     : out  STD_LOGIC;
+              
               I_FLAG_SET    : out  STD_LOGIC;
               I_FLAG_CLR    : out  STD_LOGIC;
               IO_STRB       : out  STD_LOGIC);
@@ -160,7 +179,7 @@ component int_input
    -- intermediate signals ----------------------------------
    signal s_pc_ld : std_logic := '0'; 
    signal s_pc_inc : std_logic := '0'; 
-   signal s_pc_rst : std_logic := '0'; 
+   signal s_rst : std_logic := '0'; 
    signal s_reset : std_logic := '0';
    signal s_pc_mux_sel : std_logic_vector(1 downto 0) := "00"; 
    signal s_pc_count : std_logic_vector(9 downto 0) := (others => '0');   
@@ -180,7 +199,7 @@ component int_input
    signal s_flg_z_ld : std_logic;
    
    signal s_scr_data_sel : std_logic := '0';
-   signal s_scr_addr_sel : std_logic;
+   signal s_scr_addr_sel : std_logic_vector (1 downto 0);
    signal s_scr_we : std_logic;
    
    signal s_rf_din : std_logic_vector (7 downto 0) := x"00";
@@ -207,6 +226,11 @@ component int_input
    signal s_I_FLAG_CLR : std_logic;
     
    signal s_INT_out : std_logic;
+   
+   signal s_sp_ld : std_logic;
+   signal s_sp_incr : std_logic;
+   signal s_sp_decr : std_logic;
+   signal s_sp_data_out : std_logic_vector (7 downto 0);
    
    -- helpful aliases ------------------------------------------------------------------
    alias s_ir_12_3 : std_logic_vector(9 downto 0) is s_inst_reg(12 downto 3); 
@@ -271,9 +295,12 @@ begin
               
               PC_LD         => s_pc_ld, 
               PC_INC        => s_pc_inc, 
-              PC_RST      => s_pc_rst, 
+              PC_RST      => s_rst, 
               PC_MUX_SEL    => s_pc_mux_sel, 
-              --SP_LD         => , 
+              SP_LD         => s_sp_ld, 
+              SP_INCR => s_sp_incr,
+              SP_DECR => s_sp_decr,
+              
               --SP_MUX_SEL    => , 
               --SP_RESET      => , 
               RF_WR         => s_rf_wr, 
@@ -318,7 +345,7 @@ begin
            MUX_SEL     => s_pc_mux_sel,
            PC_LD       => s_pc_ld,
            PC_INC      => s_pc_inc,
-           RST         => s_pc_rst,
+           RST         => s_rst,
            CLK         => clk,
            PC_COUNT    => s_pc_count);
 
@@ -352,7 +379,18 @@ my_FlagReg_C : FlagReg_C
            CLR       => s_flg_c_Clr, --clear the flag to '0'
            CLK       => clk, --system clock
            OUT_FLAG  => s_c_flag); --flag output
-
+           
+           
+my_Stack_Pointer : Stack_Pointer
+    port map (RST => s_rst, 
+               LD => s_sp_ld,
+               INCR => s_sp_incr,
+               DECR  => s_sp_decr,
+               CLK  => CLK,
+               DATA  => s_dx_out,
+               SP_OUT  => s_sp_data_out);
+               
+               
 out_port <= s_dx_out;
 port_id <= s_ir_7_0;
 
