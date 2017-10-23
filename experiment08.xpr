@@ -60,6 +60,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/Stack_Pointer.vhd">
+        <FileInfo RelPath="Stack_Pointer.vhd">
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ALU.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ALU.vhd"/>
@@ -204,13 +210,6 @@
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/testbench.vhd"/>
           <Attr Name="ImportTime" Val="1508348164"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/Stack_Pointer.vhd">
-        <FileInfo RelPath="Stack_Pointer.vhd">
-          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
