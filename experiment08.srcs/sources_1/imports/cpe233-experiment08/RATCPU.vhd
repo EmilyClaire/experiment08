@@ -86,7 +86,7 @@ architecture Behavioral of RAT_CPU is
               ALU_SEL       : out  STD_LOGIC_VECTOR (3 downto 0);
               
               SCR_WR        : out  STD_LOGIC;
-              SCR_ADDR_SEL  : out  STD_LOGIC;
+              SCR_ADDR_SEL  : out  STD_LOGIC_VECTOR (1 downto 0);
               SCR_DATA_SEL  : out  STD_LOGIC;
               
               C_FLAG_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -115,7 +115,7 @@ architecture Behavioral of RAT_CPU is
    component SCR_MUX 
      Port (SY : in std_logic_vector(7 downto 0);
            IR : in std_logic_vector(7 downto 0);
-           SCR_ADDR_SEL : in std_logic;
+           SCR_ADDR_SEL : in std_logic_vector (1 downto 0);
            SCR_Output : out std_logic_vector (7 downto 0));
    end component;
    
@@ -326,6 +326,16 @@ begin
               --IO_OE         => );
               
 
+my_ScratchRAM : ScratchRAM
+    port map ( DATA_IN  => s_scr_din,
+           ADR      => s_scr_addr,
+           WE       => s_scr_we,
+           CLK      => clk,
+           DATA_OUT => s_scr_dout);
+
+
+
+
    my_regfile: RegisterFile 
    port map ( D_IN   => s_rf_din,   
               DX_OUT => s_dx_out,   
@@ -334,7 +344,7 @@ begin
               ADRY   => s_ir_7_3,   
               --DX_OE  => ,   
               WE     => s_rf_wr,   
-              CLK    => CLK); 
+              CLK    => clk); 
 
 
    my_PC: program_counter 
