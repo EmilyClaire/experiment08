@@ -115,6 +115,7 @@ architecture Behavioral of RAT_CPU is
    component SCR_MUX 
      Port (SY : in std_logic_vector(7 downto 0);
            IR : in std_logic_vector(7 downto 0);
+           SP_OUT : in std_logic_vector (7 downto 0);
            SCR_ADDR_SEL : in std_logic_vector (1 downto 0);
            SCR_Output : out std_logic_vector (7 downto 0));
    end component;
@@ -270,6 +271,7 @@ begin
      my_SCR_MUX : SCR_MUX 
      port map (SY           => s_dy_out ,
                IR           => s_ir_7_0 ,
+               SP_OUT       => s_sp_data_out,
                SCR_ADDR_SEL => s_scr_addr_sel,
                SCR_Output   => s_scr_addr);
 
