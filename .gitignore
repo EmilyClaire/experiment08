@@ -5,3 +5,5 @@
 *.wdf
 *.jou
 *.str
+*.backup.jou
+*backup.str
