@@ -269,6 +269,7 @@ begin
   
 
 
+
      my_SCR_MUX : SCR_MUX 
      port map (SY           => s_dy_out ,
                IR           => s_ir_7_0 ,
