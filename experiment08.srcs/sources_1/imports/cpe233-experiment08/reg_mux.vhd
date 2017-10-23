@@ -5,7 +5,7 @@ entity reg_mux is
   Port ( 
             RF_WR_SEL : in std_logic_vector(1 downto 0);
             IN_PORT   : in std_logic_vector(7 downto 0);
-            --SP_DATA   : in std_logic_vector(7 downto 0);
+            SP_DATA   : in std_logic_vector(7 downto 0);
             ALU_RESULT: in std_logic_vector(7 downto 0);
             SCR_DATA  : in std_logic_vector (7 downto 0);
             DIN       : out std_logic_vector (7 downto 0)
@@ -21,10 +21,10 @@ begin
             output <= ALU_RESULT;
 
         elsif(RF_WR_SEL = "01")then   
-            output <= SCR_DATA;
+            output <= SCR_DATA(7 downto 0);
 
         elsif(RF_WR_SEL = "10")then
-            output <= "00000000";
+            output <= SP_DATA;
         
         else
             output <= IN_PORT;
