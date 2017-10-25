@@ -1,6 +1,6 @@
-.EQU time_INSIDE_FOR_COUNT    = 0x5E
-.EQU time_MIDDLE_FOR_COUNT    = 0xFF
-.EQU time_OUTSIDE_FOR_COUNT   = 0xFF
+.EQU time_INSIDE_FOR_COUNT    = 1;0x5E
+.EQU time_MIDDLE_FOR_COUNT    = 1;0xFF
+.EQU time_OUTSIDE_FOR_COUNT   = 1;0xFF
 
 .EQU led_port = 0x40
 
