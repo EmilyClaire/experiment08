@@ -14,9 +14,8 @@ end RAT_CPU;
 
 architecture Behavioral of RAT_CPU is
 
-
     component Stack_Pointer is
-  port (RST : in std_logic;
+      port (RST : in std_logic;
         LD : in std_logic;
         INCR : in std_logic;
         DECR : in std_logic;
@@ -68,7 +67,7 @@ architecture Behavioral of RAT_CPU is
               OPCODE_HI_5   : in   STD_LOGIC_VECTOR (4 downto 0);
               OPCODE_LO_2   : in   STD_LOGIC_VECTOR (1 downto 0);
                  
-              PC_RST           : out  STD_LOGIC;
+              PC_RST         : out  STD_LOGIC;
               PC_LD         : out  STD_LOGIC;
               PC_INC        : out  STD_LOGIC;
               PC_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -183,7 +182,6 @@ component int_input
    signal s_pc_ld : std_logic := '0'; 
    signal s_pc_inc : std_logic := '0'; 
    signal s_rst : std_logic := '0'; 
-   signal s_reset : std_logic := '0';
    signal s_pc_mux_sel : std_logic_vector(1 downto 0) := "00"; 
    signal s_pc_count : std_logic_vector(9 downto 0) := (others => '0');   
    signal s_inst_reg : std_logic_vector(17 downto 0) := (others => '0');   
@@ -238,7 +236,7 @@ component int_input
    -- helpful aliases ------------------------------------------------------------------
    alias s_ir_12_3 : std_logic_vector(9 downto 0) is s_inst_reg(12 downto 3); 
    alias s_ir_7_0 : std_logic_vector(7 downto 0) is s_inst_reg(7 downto 0);
-   alias s_ir_7_3 : std_logic_vector(4 downto 0) is s_inst_reg(7 downto 3);
+   alias s_ir_7_3 : std_logic_vector(7 downto 3) is s_inst_reg(7 downto 3);
    alias s_ir_12_8 : std_logic_vector(4 downto 0) is s_inst_reg(12 downto 8);
    alias s_ir_1_0 : std_logic_vector(1 downto 0) is s_inst_reg(1 downto 0);
    alias s_ir_17_13 : std_logic_vector(4 downto 0) is s_inst_reg(17 downto 13);   
@@ -246,8 +244,6 @@ component int_input
    alias s_rf_mux_scr : std_logic_vector (7 downto 0) is s_scr_dout (7 downto 0);
 
 begin
-
-   s_reset <= RST;
 
    my_prog_rom: prog_rom  
    port map( ADDRESS => s_pc_count, 
@@ -268,9 +264,6 @@ begin
                IR            =>  s_ir_7_0 ,
                REG_IMMED_SEL =>  s_alu_opy_sel,
                Mux_Output    =>  s_alu_mux_out);
-  
-
-
 
      my_SCR_MUX : SCR_MUX 
      port map (SY           => s_dy_out ,
@@ -286,16 +279,13 @@ begin
                ALU_RESULT => s_alu_result,
                SCR_DATA   => s_rf_mux_scr,
                DIN        => s_rf_din);
-   
-
-
 
    my_cu: CONTROL_UNIT 
    port map ( CLK           => CLK, 
               C_flag             => s_c_flag, 
               Z_flag             => s_z_flag, 
               INT           => s_INT_out, 
-              RESET           => s_reset, 
+              RESET           => RST, 
               OPCODE_HI_5   => s_ir_17_13, 
               OPCODE_LO_2   => s_ir_1_0, 
               
@@ -303,21 +293,20 @@ begin
               PC_INC        => s_pc_inc, 
               PC_RST      => s_rst, 
               PC_MUX_SEL    => s_pc_mux_sel, 
+              
               SP_LD         => s_sp_ld, 
               SP_INCR => s_sp_incr,
               SP_DECR => s_sp_decr,
               
-              --SP_MUX_SEL    => , 
-              --SP_RESET      => , 
               RF_WR         => s_rf_wr, 
               RF_WR_SEL     => s_rf_wr_sel, 
-              --RF_OE         => , 
-              --REG_IMMED_SEL => s_reg_immed_sel, 
+
               ALU_SEL       => s_alu_Sel, 
               alu_opy_sel   => s_alu_opy_sel,
               SCR_WR        => s_scr_We,  
               SCR_ADDR_SEL  => s_scr_addr_sel, 
               SCR_DATA_SEL  => s_scr_data_sel,
+
               --C_FLAG_SEL    => , 
               FLAG_C_LD     => s_flg_c_ld, 
               FLAG_C_SET    => s_flg_c_set, 
@@ -328,9 +317,7 @@ begin
               IO_STRB => IO_STRB,
               --SHAD_Z_LD     => , 
               I_FLAG_SET    => s_I_FLAG_SET, 
-              I_FLAG_CLR    => s_I_FLAG_CLR);
-              --IO_OE         => );
-              
+              I_FLAG_CLR    => s_I_FLAG_CLR);              
 
 my_ScratchRAM : ScratchRAM
     port map ( DATA_IN  => s_scr_din,
@@ -339,16 +326,12 @@ my_ScratchRAM : ScratchRAM
            CLK      => clk,
            DATA_OUT => s_scr_dout);
 
-
-
-
    my_regfile: RegisterFile 
    port map ( D_IN   => s_rf_din,   
               DX_OUT => s_dx_out,   
               DY_OUT => s_dy_out,   
               ADRX   => s_ir_12_8,   
               ADRY   => s_ir_7_3,   
-              --DX_OE  => ,   
               WE     => s_rf_wr,   
               CLK    => clk); 
 
@@ -366,7 +349,8 @@ my_ScratchRAM : ScratchRAM
            PC_COUNT    => s_pc_count);
 
     my_SCR_DATA_MUX : SCR_DATA_MUX 
-    port map (DX   => s_dx_mux_in,
+    port map (
+            DX   => s_dx_mux_in,
             PC_COUNT   => s_pc_count,
             SCR_DATA_SEL   => s_scr_data_sel,
             DATA_IN   => s_scr_din);
@@ -406,7 +390,7 @@ my_Stack_Pointer : Stack_Pointer
                DATA  => s_dx_out,
                SP_OUT  => s_sp_data_out);
                
-               
+--IO_STRB <= s_IO_STRB;               
 out_port <= s_dx_out;
 port_id <= s_ir_7_0;
 

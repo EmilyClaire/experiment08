@@ -96,7 +96,7 @@ begin
    outputs: process(CLK, RESET)
    begin
       if(RESET = '1') then
-        r_LEDS <= s_output_port;
+        r_LEDS <= x"00";
       end if;
       if (rising_edge(CLK)) then
          if (s_load = '1') then

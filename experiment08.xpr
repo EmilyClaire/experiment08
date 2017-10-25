@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/experiment08.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/experiment08.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="13"/>
+    <Option Name="WTXSimLaunchSim" Val="25"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -60,22 +60,16 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ALU.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ALU.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/ScratchPAD.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/Stack_Pointer.vhd">
         <FileInfo RelPath="Stack_Pointer.vhd">
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/scr_data_mux.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/scr_data_mux.vhd"/>
+          <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -88,33 +82,15 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/new/ScratchPAD.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/reg_mux.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/reg_mux.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/prog_rom.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ControlUnit.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ControlUnit.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ALU_MUX.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ALU_MUX.vhd"/>
           <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -128,17 +104,25 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/int_input.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/cpe 233/prog_rom.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/int_input.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../prog_rom.vhd"/>
+          <Attr Name="ImportTime" Val="1508898928"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/program_counter.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/program_counter.vhd"/>
           <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/scr_data_mux.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/int_input.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/scr_data_mux.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/int_input.vhd"/>
           <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -160,9 +144,25 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/program_counter.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ControlUnit.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/program_counter.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ControlUnit.vhd"/>
+          <Attr Name="ImportTime" Val="1508348164"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ALU_MUX.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ALU_MUX.vhd"/>
+          <Attr Name="ImportTime" Val="1508348164"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ALU.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ALU.vhd"/>
           <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -180,6 +180,13 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/RatCPUWrapper.vhd"/>
           <Attr Name="ImportTime" Val="1508348165"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -214,7 +221,6 @@
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="RAT_wrapper"/>
-        <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
@@ -235,7 +241,7 @@
       <Filter Type="Srcs"/>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="RAT_wrapper"/>
+        <Option Name="TopModule" Val="EXP8_wrapper_tb"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>

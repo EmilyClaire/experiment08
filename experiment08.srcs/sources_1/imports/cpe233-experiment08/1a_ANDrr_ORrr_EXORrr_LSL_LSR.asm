@@ -15,9 +15,9 @@
 .EQU BIT_6_MASK = 0X40
 .EQU BIT_7_MASK = 0X80
 
-.EQU INSIDE_FOR_COUNT    = 1;0xB4
-.EQU MIDDLE_FOR_COUNT    = 1;0xCA
-.EQU OUTSIDE_FOR_COUNT   = 1;0xAA
+.EQU INSIDE_FOR_COUNT    = 0xB4
+.EQU MIDDLE_FOR_COUNT    = 0xCA
+.EQU OUTSIDE_FOR_COUNT   = 0xAA
 
 ;------------------------------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@
 ;------------------------------------------------------------------------------------------------------
 
 .CSEG
-.ORG		0x30
+.ORG		0x10
 
 INIT:		MOV 	R20,	0x00	;output register
 			MOV 	R10, 	0x00	;used to set carry flag
@@ -85,8 +85,8 @@ inside_for1:  	SUB     R19, 0x01
              	BRNE    outside_for1
 
 ;---------------------------------------------------------------
-ORTest:			MOV 	R4, R1; puts 0f in r4
-			OR 	R4, R2 ;compares 0f and aa
+ORTest:			MOV 	R4, R1
+			OR 	R4, R2
 			CMP 	R4, 0XAF
 			BRNE 	timedelay2
 
@@ -187,10 +187,16 @@ inside_for5:  	SUB     R19, 0x01
              	BRNE    outside_for5
 
 ;---------------------------------------------------------------
-;LightLEDs:		OR	R20, 0xE0
-;				OUT R20, LED_PORT
+LightLEDs:		OR	R20, 0xE0
+				OUT R20, LED_PORT
 
 ;---------------------------------------------------------------
 endless_loop:	MOV R31, 0x00
 				BRN	endless_loop
+
+
+
+
+
+
 		

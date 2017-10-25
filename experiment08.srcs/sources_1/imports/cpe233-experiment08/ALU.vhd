@@ -100,6 +100,7 @@ begin
     when "0101" =>
         v_out :=  A and B;
         s_c <= '0';
+        
         if(v_out = x"00") then
             s_z <= '1';
         else

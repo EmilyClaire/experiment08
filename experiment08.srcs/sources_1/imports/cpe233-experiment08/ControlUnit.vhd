@@ -22,7 +22,7 @@ entity CONTROL_UNIT is
 		   OPCODE_HI_5   : in   STD_LOGIC_VECTOR (4 downto 0);
 		   OPCODE_LO_2   : in   STD_LOGIC_VECTOR (1 downto 0);
 			  
-           PC_RST           : out  STD_LOGIC;
+           PC_RST        : out  STD_LOGIC;
 		   PC_LD         : out  STD_LOGIC;
 		   PC_INC        : out  STD_LOGIC;
            PC_MUX_SEL    : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -111,7 +111,6 @@ begin
 		    NS <= ST_fet;	
 			
 			    PC_RST <= '1';
-			    PC_RST <= '1';	 	
 				
          -- STATE: the fetch cycle -----------------------------------
          when ST_fet => 
@@ -817,7 +816,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
                --OUT
                  when "1101000" | "1101001" | "1101010" | "1101011" =>             
 
-				PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET          <= '0';
+			   PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET          <= '0';
                PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
                PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                           ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
