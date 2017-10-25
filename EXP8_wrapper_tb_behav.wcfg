@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="EXP8_wrapper_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="EXP8_wrapper_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="349900000fs"></ZoomStartTime>
+      <ZoomEndTime time="368100001fs"></ZoomEndTime>
+      <Cursor1Time time="365000000fs"></Cursor1Time>
+   </zoom_setting>
+   <WVObjectSize size="9" />
+   <wvobject fp_name="/EXP8_wrapper_tb/switches_tb" type="array">
+      <obj_property name="ElementShortName">switches_tb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">switches_tb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/leds_tb" type="array">
+      <obj_property name="ElementShortName">leds_tb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">leds_tb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/clk_tb" type="logic">
+      <obj_property name="ElementShortName">clk_tb</obj_property>
+      <obj_property name="ObjectShortName">clk_tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/rst_tb" type="logic">
+      <obj_property name="ElementShortName">rst_tb</obj_property>
+      <obj_property name="ObjectShortName">rst_tb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/my_PC/PC_COUNT" type="array">
+      <obj_property name="ElementShortName">PC_COUNT[9:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_COUNT[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/my_PC/FROM_STACK" type="array">
+      <obj_property name="ElementShortName">FROM_STACK[9:0]</obj_property>
+      <obj_property name="ObjectShortName">FROM_STACK[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/my_PC/FROM_IMMED" type="array">
+      <obj_property name="ElementShortName">FROM_IMMED[9:0]</obj_property>
+      <obj_property name="ObjectShortName">FROM_IMMED[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/my_PC/MUX_SEL" type="array">
+      <obj_property name="ElementShortName">MUX_SEL[1:0]</obj_property>
+      <obj_property name="ObjectShortName">MUX_SEL[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/EXP8_wrapper_tb/uut/CPU/my_PC/PC_LD" type="logic">
+      <obj_property name="ElementShortName">PC_LD</obj_property>
+      <obj_property name="ObjectShortName">PC_LD</obj_property>
+   </wvobject>
+</wave_config>

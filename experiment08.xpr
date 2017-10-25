@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/experiment08.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/experiment08.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="31"/>
+    <Option Name="WTXSimLaunchSim" Val="37"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -246,6 +246,7 @@
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>
         <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/EXP8_wrapper_tb_behav.wcfg"/>
       </Config>
     </FileSet>
   </FileSets>

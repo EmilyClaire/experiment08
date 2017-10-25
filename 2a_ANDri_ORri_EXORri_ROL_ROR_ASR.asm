@@ -3,9 +3,9 @@
 ---------------------------------------------------------------------
 .EQU SWITCH_PORT = 0x20         ; port for switch input  --- INPUT
 .EQU LED_PORT = 0x40            ; port for LED output    --- OUTPUT
-.EQU INSIDE_FOR_COUNT	= 0xFF	;  
-.EQU MIDDLE_FOR_COUNT	= 0xFF	; 
-.EQU OUTSIDE_FOR_COUNT	= 0x40	;
+.EQU INSIDE_FOR_COUNT	= 1;0xFF	;  
+.EQU MIDDLE_FOR_COUNT	= 1;0xFF	; 
+.EQU OUTSIDE_FOR_COUNT	= 1;0x40	;
 .EQU BITMASK01		= 0x01
 .EQU BITMASK02		= 0x02
 .EQU BITMASK04		= 0x04
@@ -68,7 +68,10 @@ IMMATEST:	MOV	R10,0xF0
 		CMP	R10, CMPTEST8
 		CALL	PASS5
 		CALL	PAUSE
-		BRN 	MAIN
+
+endless_loop:	MOV R31, 0x00
+				BRN	endless_loop
+
 		
 Pause:		MOV 	R1, OUTSIDE_FOR_COUNT	;set outside for loop count
 outside_for: 	SUB     R1, 0x01
@@ -98,5 +101,3 @@ PASS4:		ADD	R0, BITMASK08
 PASS5:		ADD	R0, 0xF0
 		OUT	R0, LED_PORT
 		RET
-
-;
