@@ -49,9 +49,9 @@
 .EQU B6_MASK = 0x40             ; mask all but bit6
 .EQU B7_MASK = 0x80             ; mask all but bit7
  
-.EQU INSIDE_FOR_COUNT  = 0xFF   ; These three contestants set the 
-.EQU MIDDLE_FOR_COUNT  = 0xFF   ; amount of delay between each test.
-.EQU OUTSIDE_FOR_COUNT = 0x60   ; Current time delay is about 503 mS.
+.EQU INSIDE_FOR_COUNT  = 1;0xFF   ; These three contestants set the 
+.EQU MIDDLE_FOR_COUNT  = 1;0xFF   ; amount of delay between each test.
+.EQU OUTSIDE_FOR_COUNT = 1;0x60   ; Current time delay is about 503 mS.
 ;- 	Setting the last constant to FF will give a 1.3 sec delay.
 
 ;--------------------------------------------------------------------    
@@ -98,7 +98,7 @@ Five_down:    MOV R11, 0x00             ;
               EXOR R10, R11             ; 
               OUT R10, LED_PORT         ; 
               CALL Pause                ; 
-Six_down:     Brn Main                  ; 
+Six_down:     Brn Six_down                 ; 
                                         ; 
                                         ;<-Code dies when it crosses 
                                         ;	this border 

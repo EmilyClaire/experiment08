@@ -65,9 +65,9 @@ C5:  Raw line from source code.
 (0049)                       064  || .EQU B6_MASK = 0x40             ; mask all but bit6
 (0050)                       128  || .EQU B7_MASK = 0x80             ; mask all but bit7
 (0051)                            ||  
-(0052)                       255  || .EQU INSIDE_FOR_COUNT  = 0xFF   ; These three contestants set the 
-(0053)                       255  || .EQU MIDDLE_FOR_COUNT  = 0xFF   ; amount of delay between each test.
-(0054)                       096  || .EQU OUTSIDE_FOR_COUNT = 0x60   ; Current time delay is about 503 mS.
+(0052)                       001  || .EQU INSIDE_FOR_COUNT  = 1;0xFF   ; These three contestants set the 
+(0053)                       001  || .EQU MIDDLE_FOR_COUNT  = 1;0xFF   ; amount of delay between each test.
+(0054)                       001  || .EQU OUTSIDE_FOR_COUNT = 1;0x60   ; Current time delay is about 503 mS.
 (0055)                            || ;- 	Setting the last constant to FF will give a 1.3 sec delay.
 (0056)                            || 
 (0057)                            || ;--------------------------------------------------------------------    
@@ -114,7 +114,7 @@ C5:  Raw line from source code.
 (0098)  CS-0x05A  0x00A5A         ||               EXOR R10, R11             ; 
 (0099)  CS-0x05B  0x34A40         ||               OUT R10, LED_PORT         ; 
 (0100)  CS-0x05C  0x08371         ||               CALL Pause                ; 
-(0101)  CS-0x05D  0x08200  0x05D  || Six_down:     Brn Main                  ; 
+(0101)  CS-0x05D  0x082E8  0x05D  || Six_down:     Brn Six_down                 ; 
 (0102)                            ||                                         ; 
 (0103)                            ||                                         ;<-Code dies when it crosses 
 (0104)                            ||                                         ;	this border 
@@ -142,11 +142,11 @@ C5:  Raw line from source code.
 (0126)  CS-0x06C  0x08371         ||               CALL Pause
 (0127)  CS-0x06D  0x08260         ||               BRN Four_Down		
 (0128)                            || 
-(0129)  CS-0x06E  0x36160  0x06E  || Pause:        MOV R1, OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0129)  CS-0x06E  0x36101  0x06E  || Pause:        MOV R1, OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0130)  CS-0x06F  0x2C101  0x06F  || outside_for:  SUB R1, 0x01
-(0131)  CS-0x070  0x362FF         ||               MOV R2, MIDDLE_FOR_COUNT	 ;set middle for loop count
+(0131)  CS-0x070  0x36201         ||               MOV R2, MIDDLE_FOR_COUNT	 ;set middle for loop count
 (0132)  CS-0x071  0x2C201  0x071  || middle_for:   SUB R2, 0x01
-(0133)  CS-0x072  0x363FF         ||               MOV R3, INSIDE_FOR_COUNT   ;set inside for loop count
+(0133)  CS-0x072  0x36301         ||               MOV R3, INSIDE_FOR_COUNT   ;set inside for loop count
 (0134)  CS-0x073  0x2C301  0x073  || inside_for:   SUB R3, 0x01
 (0135)  CS-0x074  0x0839B         ||               BRNE inside_for
 (0136)  CS-0x075  0x22200         ||               OR R2, 0x00           ;load flags for middle for counter
@@ -190,12 +190,12 @@ CHECK_ZERO     0x0CA   (0146)  ||
 FIVE_DOWN      0x055   (0093)  ||  
 FOUR_DOWN      0x04C   (0084)  ||  0127 
 INSIDE_FOR     0x073   (0134)  ||  0135 
-MAIN           0x040   (0072)  ||  0101 
+MAIN           0x040   (0072)  ||  
 MIDDLE_FOR     0x071   (0132)  ||  0137 
 ONE_DOWN       0x045   (0077)  ||  0112 
 OUTSIDE_FOR    0x06F   (0130)  ||  0139 
 PAUSE          0x06E   (0129)  ||  0092 0100 0111 0116 0121 0126 0148 
-SIX_DOWN       0x05D   (0101)  ||  
+SIX_DOWN       0x05D   (0101)  ||  0101 
 THREE_DOWN     0x049   (0081)  ||  0122 
 TWO_DOWN       0x047   (0079)  ||  0117 
 ZERO_DOWN      0x043   (0075)  ||  0149 
@@ -217,10 +217,10 @@ B5_MASK        0x020   (0048)  ||  0089
 B6_MASK        0x040   (0049)  ||  
 B7_MASK        0x080   (0050)  ||  
 BTN_PORT       0x0FF   (0036)  ||  
-INSIDE_FOR_COUNT 0x0FF   (0052)  ||  0133 
+INSIDE_FOR_COUNT 0x001   (0052)  ||  0133 
 LED_PORT       0x040   (0035)  ||  0091 0099 0110 0115 0120 0125 0147 
-MIDDLE_FOR_COUNT 0x0FF   (0053)  ||  0131 
-OUTSIDE_FOR_COUNT 0x060   (0054)  ||  0129 
+MIDDLE_FOR_COUNT 0x001   (0053)  ||  0131 
+OUTSIDE_FOR_COUNT 0x001   (0054)  ||  0129 
 SWITCH_PORT    0x020   (0034)  ||  
 
 

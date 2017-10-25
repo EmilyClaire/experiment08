@@ -28,7 +28,7 @@ begin
   case SEL is
     --ADD
     when "0000" => 
-        v_outAndC := '1' & (A + B);
+        v_outAndC := ('0' & A ) + B;
         s_c <= v_outAndC(8);
         v_out := v_outAndC(7 downto 0);
         
