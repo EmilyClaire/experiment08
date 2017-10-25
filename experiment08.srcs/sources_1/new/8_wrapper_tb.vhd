@@ -73,11 +73,12 @@ begin
       -- Stimulus process
    stim_proc: process
    begin       
-      rst_tb <= '1';           
-      wait for 50 ns;  
       rst_tb <= '0';     
-      wait for 100000ns;
-      
+      wait for 4000ns;
+      rst_tb <= '1';
+      wait for 50ns;
+      rst_tb <='0';
+      wait for 4000ns;
 --      rst_tb <= '1';
 --      wait for 50ns;
 --      rst_tb <= '0';

@@ -302,7 +302,7 @@ else
     PC_LD <= '0';
 end if;
 
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
