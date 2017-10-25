@@ -15,7 +15,7 @@ end reg_mux;
 architecture Behavioral of reg_mux is
 signal output : std_logic_vector(7 downto 0);
 begin
-    Process(RF_WR_SEL, IN_PORT, ALU_RESULT, SCR_DATA)
+    Process(SP_DATA, RF_WR_SEL, IN_PORT, ALU_RESULT, SCR_DATA)
         begin 
         if(RF_WR_SEL = "00")then
             output <= ALU_RESULT;

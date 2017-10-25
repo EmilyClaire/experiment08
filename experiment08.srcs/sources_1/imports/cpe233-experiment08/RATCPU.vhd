@@ -219,7 +219,7 @@ component int_input
    signal s_c_flag : std_logic;
    signal s_z_flag : std_logic;
    
-   signal s_dx_mux_in : std_logic_vector (7 downto 0):= s_dx_out;
+   signal s_dx_mux_in : std_logic_vector (7 downto 0);
    
    signal s_from_immed : std_logic_vector (9 downto 0) := "1111111111";
    
