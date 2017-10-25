@@ -236,7 +236,7 @@ component int_input
    -- helpful aliases ------------------------------------------------------------------
    alias s_ir_12_3 : std_logic_vector(9 downto 0) is s_inst_reg(12 downto 3); 
    alias s_ir_7_0 : std_logic_vector(7 downto 0) is s_inst_reg(7 downto 0);
-   alias s_ir_7_3 : std_logic_vector(7 downto 3) is s_inst_reg(7 downto 3);
+   alias s_ir_7_3 : std_logic_vector(4 downto 0) is s_inst_reg(7 downto 3);
    alias s_ir_12_8 : std_logic_vector(4 downto 0) is s_inst_reg(12 downto 8);
    alias s_ir_1_0 : std_logic_vector(1 downto 0) is s_inst_reg(1 downto 0);
    alias s_ir_17_13 : std_logic_vector(4 downto 0) is s_inst_reg(17 downto 13);   
