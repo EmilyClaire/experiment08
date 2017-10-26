@@ -14,9 +14,9 @@ C5:  Raw line from source code.
 ----------------------------------------------------------------------
 
 
-(0001)                       094  || .EQU time_INSIDE_FOR_COUNT    = 0x5E
-(0002)                       255  || .EQU time_MIDDLE_FOR_COUNT    = 0xFF
-(0003)                       255  || .EQU time_OUTSIDE_FOR_COUNT   = 0xFF
+(0001)                       001  || .EQU time_INSIDE_FOR_COUNT    = 1;0x5E
+(0002)                       001  || .EQU time_MIDDLE_FOR_COUNT    = 1;0xFF
+(0003)                       001  || .EQU time_OUTSIDE_FOR_COUNT   = 1;0xFF
 (0004)                            || 
 (0005)                       064  || .EQU led_port = 0x40
 (0006)                            || 
@@ -45,13 +45,13 @@ C5:  Raw line from source code.
 (0029)  CS-0x048  0x35F40  0x048  || 	endtest1: OUT R31, led_port
 (0030)                            || 
 (0031)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0032)  CS-0x049  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0032)  CS-0x049  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0033)  CS-0x04A  0x2C101  0x04A  || 	outside_for1: SUB     R1, 0x01
 (0034)                            || 
-(0035)  CS-0x04B  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0035)  CS-0x04B  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0036)  CS-0x04C  0x2C201  0x04C  || 	middle_for1:  SUB     R2, 0x01
 (0037)                            || 		     
-(0038)  CS-0x04D  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0038)  CS-0x04D  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0039)  CS-0x04E  0x2C301  0x04E  || 	inside_for1:  SUB     R3, 0x01
 (0040)  CS-0x04F  0x08273         || 		     BRNE    inside_for1
 (0041)                            || 		     
@@ -78,13 +78,13 @@ C5:  Raw line from source code.
 (0062)  CS-0x05C  0x35F40  0x05C  || 	endtest2: OUT R31, led_port
 (0063)                            || 
 (0064)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0065)  CS-0x05D  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0065)  CS-0x05D  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0066)  CS-0x05E  0x2C101  0x05E  || 	outside_for2: SUB     R1, 0x01
 (0067)                            || 
-(0068)  CS-0x05F  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0068)  CS-0x05F  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0069)  CS-0x060  0x2C201  0x060  || 	middle_for2:  SUB     R2, 0x01
 (0070)                            || 	     
-(0071)  CS-0x061  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0071)  CS-0x061  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0072)  CS-0x062  0x2C301  0x062  || 	inside_for2:  SUB     R3, 0x01
 (0073)  CS-0x063  0x08313         || 		     BRNE    inside_for2
 (0074)                            || 		     
@@ -110,13 +110,13 @@ C5:  Raw line from source code.
 (0094)  CS-0x070  0x35F40  0x070  || 	endtest3: OUT R31, led_port
 (0095)                            || 
 (0096)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0097)  CS-0x071  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0097)  CS-0x071  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0098)  CS-0x072  0x2C101  0x072  || 	outside_for3: SUB     R1, 0x01
 (0099)                            || 
-(0100)  CS-0x073  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0100)  CS-0x073  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0101)  CS-0x074  0x2C201  0x074  || 	middle_for3:  SUB     R2, 0x01
 (0102)                            || 		     
-(0103)  CS-0x075  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0103)  CS-0x075  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0104)  CS-0x076  0x2C301  0x076  || 	inside_for3:  SUB     R3, 0x01
 (0105)  CS-0x077  0x083B3         || 		     BRNE    inside_for3
 (0106)                            || 	     
@@ -142,13 +142,13 @@ C5:  Raw line from source code.
 (0126)  CS-0x084  0x35F40  0x084  || 	endtest4: OUT R31, led_port
 (0127)                            || 
 (0128)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0129)  CS-0x085  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0129)  CS-0x085  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0130)  CS-0x086  0x2C101  0x086  || 	outside_for4: SUB     R1, 0x01
 (0131)                            || 
-(0132)  CS-0x087  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0132)  CS-0x087  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0133)  CS-0x088  0x2C201  0x088  || 	middle_for4:  SUB     R2, 0x01
 (0134)                            || 	     
-(0135)  CS-0x089  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0135)  CS-0x089  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0136)  CS-0x08A  0x2C301  0x08A  || 	inside_for4:  SUB     R3, 0x01
 (0137)  CS-0x08B  0x08453         || 		     BRNE    inside_for4
 (0138)                            || 		     
@@ -194,13 +194,13 @@ C5:  Raw line from source code.
 (0178)  CS-0x0AA  0x35F40  0x0AA  || 	endtest5: OUT R31, led_port
 (0179)                            || 
 (0180)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0181)  CS-0x0AB  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0181)  CS-0x0AB  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0182)  CS-0x0AC  0x2C101  0x0AC  || 	outside_for5: SUB     R1, 0x01
 (0183)                            || 
-(0184)  CS-0x0AD  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0184)  CS-0x0AD  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0185)  CS-0x0AE  0x2C201  0x0AE  || 	middle_for5:  SUB     R2, 0x01
 (0186)                            || 		     
-(0187)  CS-0x0AF  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0187)  CS-0x0AF  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0188)  CS-0x0B0  0x2C301  0x0B0  || 	inside_for5:  SUB     R3, 0x01
 (0189)  CS-0x0B1  0x08583         || 		     BRNE    inside_for5
 (0190)                            || 		     
@@ -223,13 +223,13 @@ C5:  Raw line from source code.
 (0207)  CS-0x0BA  0x35F40  0x0BA  || 	endtest6: OUT R31, led_port
 (0208)                            || 
 (0209)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0210)  CS-0x0BB  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0210)  CS-0x0BB  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0211)  CS-0x0BC  0x2C101  0x0BC  || 	outside_for6: SUB     R1, 0x01
 (0212)                            || 
-(0213)  CS-0x0BD  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0213)  CS-0x0BD  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0214)  CS-0x0BE  0x2C201  0x0BE  || 	middle_for6:  SUB     R2, 0x01
 (0215)                            || 		     
-(0216)  CS-0x0BF  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0216)  CS-0x0BF  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0217)  CS-0x0C0  0x2C301  0x0C0  || 	inside_for6:  SUB     R3, 0x01
 (0218)  CS-0x0C1  0x08603         || 		     BRNE    inside_for6
 (0219)                            || 	     
@@ -251,13 +251,13 @@ C5:  Raw line from source code.
 (0235)  CS-0x0CA  0x35F40  0x0CA  || 	endtest7: OUT R31, led_port
 (0236)                            || 
 (0237)                            || 	;--------------------- Pause 1/2 second ----------------------------------------       
-(0238)  CS-0x0CB  0x361FF         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
+(0238)  CS-0x0CB  0x36101         || 		     MOV     R1, time_OUTSIDE_FOR_COUNT  ;set outside for loop count
 (0239)  CS-0x0CC  0x2C101  0x0CC  || 	outside_for7: SUB     R1, 0x01
 (0240)                            || 
-(0241)  CS-0x0CD  0x362FF         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
+(0241)  CS-0x0CD  0x36201         || 		     MOV     R2, time_MIDDLE_FOR_COUNT   ;set middle for loop count
 (0242)  CS-0x0CE  0x2C201  0x0CE  || 	middle_for7:  SUB     R2, 0x01
 (0243)                            || 		     
-(0244)  CS-0x0CF  0x3635E         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
+(0244)  CS-0x0CF  0x36301         || 		     MOV     R3, time_INSIDE_FOR_COUNT   ;set inside for loop count
 (0245)  CS-0x0D0  0x2C301  0x0D0  || 	inside_for7:  SUB     R3, 0x01
 (0246)  CS-0x0D1  0x08683         || 		     BRNE    inside_for7
 (0247)                            || 		     
@@ -373,9 +373,9 @@ TEST8FUNC2     0x0E8   (0285)  ||  0282 0291
 -- Directives: .EQU
 ------------------------------------------------------------ 
 LED_PORT       0x040   (0005)  ||  0016 0029 0062 0094 0126 0178 0207 0235 0263 
-TIME_INSIDE_FOR_COUNT 0x05E   (0001)  ||  0038 0071 0103 0135 0187 0216 0244 
-TIME_MIDDLE_FOR_COUNT 0x0FF   (0002)  ||  0035 0068 0100 0132 0184 0213 0241 
-TIME_OUTSIDE_FOR_COUNT 0x0FF   (0003)  ||  0032 0065 0097 0129 0181 0210 0238 
+TIME_INSIDE_FOR_COUNT 0x001   (0001)  ||  0038 0071 0103 0135 0187 0216 0244 
+TIME_MIDDLE_FOR_COUNT 0x001   (0002)  ||  0035 0068 0100 0132 0184 0213 0241 
+TIME_OUTSIDE_FOR_COUNT 0x001   (0003)  ||  0032 0065 0097 0129 0181 0210 0238 
 
 
 -- Directives: .DEF

@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/experiment08.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/experiment08.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="45"/>
+    <Option Name="WTXSimLaunchSim" Val="46"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -106,8 +106,8 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe 233/prog_rom.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1508898928"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
+          <Attr Name="ImportTime" Val="1509012869"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
