@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="C:/Users/eclai/Desktop/cpe 233/experiment08/experiment08.xpr">
+<Project Version="7" Minor="14" Path="C:/Users/Donald/Documents/experiment08/experiment08.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="675eb680438444a6998d7745b31e49a9"/>
@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/experiment08.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/experiment08.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="43"/>
+    <Option Name="WTXSimLaunchSim" Val="45"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>

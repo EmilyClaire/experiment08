@@ -24,13 +24,19 @@ begin
     if (rising_edge(CLK)) then
         if (RST = '1') then
             count <= x"00";
-        elsif(LD = '1') then
+        else 
+        
+        if(LD = '1') then
             count <= DATA;
-        elsif(INCR = '1') then
-            count <= count + 1;    
-        elsif(DECR = '1') then
-            count <= count - 1;                       
         end if;
+        if(INCR = '1') then
+            count <= count + 1;
+        end if;    
+        if(DECR = '1') then
+            count <= count - 1; 
+        end if;                      
+        
+       end if;
     end if;
 
 end process;

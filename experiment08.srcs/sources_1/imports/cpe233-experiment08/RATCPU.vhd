@@ -350,7 +350,7 @@ my_ScratchRAM : ScratchRAM
 
     my_SCR_DATA_MUX : SCR_DATA_MUX 
     port map (
-            DX   => s_dx_mux_in,
+            DX   => s_dx_out,
             PC_COUNT   => s_pc_count,
             SCR_DATA_SEL   => s_scr_data_sel,
             DATA_IN   => s_scr_din);
