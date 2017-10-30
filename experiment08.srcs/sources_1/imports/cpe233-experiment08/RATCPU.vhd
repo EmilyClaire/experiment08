@@ -433,8 +433,6 @@ my_shad_flag_reg_c: Shad_FlagReg_C
                CLK      => s_clk,
                OUT_FLAG => s_flg_shad_c_out); --flag output
     
-
-
 out_port <= s_dx_out;
 port_id <= s_ir_7_0;
 
