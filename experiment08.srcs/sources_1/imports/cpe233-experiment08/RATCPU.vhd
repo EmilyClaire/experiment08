@@ -171,6 +171,27 @@ component int_input
               OUT_FLAG : out  STD_LOGIC); --flag output
    end component;
    
+   component flag_mux is
+     Port (Data_In  : in std_logic;
+           Flag_Sel : in std_logic;
+           Shad_Out : in std_logic;
+           Data_Out : out std_logic );
+   end component;
+   
+   component Shad_FlagReg_Z is
+       Port ( IN_FLAG  : in  STD_LOGIC; --flag input
+              LD       : in  STD_LOGIC; --load the out_flag with the in_flag value
+              CLK      : in  STD_LOGIC; --system clock
+              OUT_FLAG : out  STD_LOGIC); --flag output
+   end component;
+   
+   component Shad_FlagReg_C is
+       Port ( IN_FLAG  : in  STD_LOGIC; --flag input
+              LD       : in  STD_LOGIC; --load the out_flag with the in_flag value
+              CLK      : in  STD_LOGIC; --system clock
+              OUT_FLAG : out  STD_LOGIC); --flag output
+   end component;
+
    -- intermediate signals ----------------------------------
    signal s_pc_ld : std_logic := '0'; 
    signal s_pc_inc : std_logic := '0'; 
