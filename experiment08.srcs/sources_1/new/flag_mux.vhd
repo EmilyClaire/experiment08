@@ -1,43 +1,32 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 10/30/2017 04:29:18 PM
--- Design Name: 
--- Module Name: flag_mux - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
 
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity flag_mux is
---  Port ( );
+  Port (Data_In  : in std_logic;
+        Flag_Sel : in std_logic;
+        Shad_Out : in std_logic;
+        Data_Out : out std_logic );
 end flag_mux;
 
 architecture Behavioral of flag_mux is
 
+signal Mux_Out : std_logic;
+
 begin
 
+    process(Data_In, Flag_Sel, Shad_Out)
+        begin
+            if (Flag_Sel = '0') then
+                Mux_Out <= Data_In;
+            end if;
+            if (Flag_Sel = '1') then
+                Mux_Out <= Shad_Out;
+            end if;
+
+    end process;
+
+Data_Out <= Mux_Out;
 
 end Behavioral;
