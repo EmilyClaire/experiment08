@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
 entity RAT_CPU is
     Port ( IN_PORT : in  STD_LOGIC_VECTOR (7 downto 0);
            RST : in  STD_LOGIC;
@@ -46,8 +45,7 @@ architecture Behavioral of RAT_CPU is
            WE       : in     STD_LOGIC;
            CLK      : in     STD_LOGIC;
            DATA_OUT : out    STD_LOGIC_VECTOR (9 downto 0));
-    end component;
-    
+    end component;    
     
     component SCR_DATA_MUX is
       Port (DX : in std_logic_vector(7 downto 0);
@@ -55,8 +53,6 @@ architecture Behavioral of RAT_CPU is
             SCR_DATA_SEL : in std_logic;
             DATA_IN : out std_logic_vector (9 downto 0));
     end component;
-
-
 
    component CONTROL_UNIT
        Port ( CLK           : in   STD_LOGIC;
@@ -144,8 +140,7 @@ component int_input
            I_clr : in std_logic;
            clk : in std_logic;
            INT_out : out std_logic);
-   end component;
-   
+   end component;   
    
    component program_counter 
      Port (
@@ -163,8 +158,6 @@ component int_input
    component FlagReg_Z 
        Port ( IN_FLAG  : in  STD_LOGIC; --flag input
               LD       : in  STD_LOGIC; --load the out_flag with the in_flag value
-              --SET      : in  STD_LOGIC; --set the flag to '1'
-              --CLR      : in  STD_LOGIC; --clear the flag to '0'
               CLK      : in  STD_LOGIC; --system clock
               OUT_FLAG : out  STD_LOGIC); --flag output
    end component;
@@ -185,7 +178,6 @@ component int_input
    signal s_pc_mux_sel : std_logic_vector(1 downto 0) := "00"; 
    signal s_pc_count : std_logic_vector(9 downto 0) := (others => '0');   
    signal s_inst_reg : std_logic_vector(17 downto 0) := (others => '0');   
-   --signal s_multi_bus : std_logic_vector(7 downto 0) := (others => '0'); 
    signal s_clk : std_logic;
    
    signal s_rf_wr : std_logic;
@@ -193,7 +185,9 @@ component int_input
    
    signal s_alu_sel : std_logic_vector (3 downto 0);
    signal s_alu_opy_sel : std_logic := '0';
-   
+
+   signal s_flg_ld_sel : std_logic;
+   signal s_flg_shad_ld: std_logic;
    signal s_flg_c_set : std_logic;
    signal s_flg_c_clr : std_logic;
    signal s_flg_c_ld : std_logic;
@@ -307,15 +301,14 @@ begin
               SCR_ADDR_SEL  => s_scr_addr_sel, 
               SCR_DATA_SEL  => s_scr_data_sel,
 
-              --C_FLAG_SEL    => , 
+              FLAG_LD_SEL    => s_flg_ld_sel, 
               FLAG_C_LD     => s_flg_c_ld, 
               FLAG_C_SET    => s_flg_c_set, 
               FLAG_C_CLR    => s_flg_c_clr, 
-              --SHAD_C_LD     => , 
-              --Z_FLAG_SEL    => , 
+              FLAG_SHAD_LD  => s_flg_shad_ld, 
               FLAG_Z_LD     => s_flg_z_ld,
               IO_STRB => IO_STRB,
-              --SHAD_Z_LD     => , 
+ 
               I_FLAG_SET    => s_I_FLAG_SET, 
               I_FLAG_CLR    => s_I_FLAG_CLR);              
 
