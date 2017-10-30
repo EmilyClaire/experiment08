@@ -209,6 +209,8 @@ component int_input
 
    signal s_flg_ld_sel : std_logic;
    signal s_flg_shad_ld: std_logic;
+   signal s_flg_shad_c_out: std_logic;
+   signal s_flg_shad_z_out: std_logic;
    signal s_flg_c_set : std_logic;
    signal s_flg_c_clr : std_logic;
    signal s_flg_c_ld : std_logic;
@@ -231,7 +233,9 @@ component int_input
    signal s_alu_mux_out : std_logic_vector (7 downto 0);
    signal s_c_flag : std_logic;
    signal s_z_flag : std_logic;
-   
+   signal s_c_mux_out: std_logic;
+   signal s_z_mux_out: std_logic;
+       
    signal s_dx_mux_in : std_logic_vector (7 downto 0);
    
    signal s_from_immed : std_logic_vector (9 downto 0) := "1111111111";
@@ -260,12 +264,12 @@ component int_input
 
 begin
 
-   my_prog_rom: prog_rom  
+my_prog_rom: prog_rom  
    port map( ADDRESS => s_pc_count, 
              INSTRUCTION => s_inst_reg, 
              CLK => CLK); 
 
-   my_alu: ALU
+my_alu: ALU
    port map ( A => s_dx_out,       
               B => s_alu_mux_out,       
               Cin => s_c_flag,     
@@ -274,20 +278,20 @@ begin
               Z => s_alu_z,       
               RESULT => s_alu_result); 
               
-   my_ALU_MUX : ALU_MUX
+my_ALU_MUX: ALU_MUX
      port map (SY            => s_dy_out ,
                IR            =>  s_ir_7_0 ,
                REG_IMMED_SEL =>  s_alu_opy_sel,
                Mux_Output    =>  s_alu_mux_out);
 
-     my_SCR_MUX : SCR_MUX 
+my_SCR_MUX: SCR_MUX 
      port map (SY           => s_dy_out ,
                IR           => s_ir_7_0 ,
                SP_OUT       => s_sp_data_out,
                SCR_ADDR_SEL => s_scr_addr_sel,
                SCR_Output   => s_scr_addr);
 
-   my_reg_mux : reg_mux 
+my_reg_mux: reg_mux 
      port map (RF_WR_SEL  => s_rf_wr_sel ,
                IN_PORT    => IN_PORT,
                SP_DATA    => s_sp_data_out,
@@ -295,7 +299,7 @@ begin
                SCR_DATA   => s_rf_mux_scr,
                DIN        => s_rf_din);
 
-   my_cu: CONTROL_UNIT 
+my_cu: CONTROL_UNIT 
    port map ( CLK           => CLK, 
               C_flag             => s_c_flag, 
               Z_flag             => s_z_flag, 
@@ -333,14 +337,14 @@ begin
               I_FLAG_SET    => s_I_FLAG_SET, 
               I_FLAG_CLR    => s_I_FLAG_CLR);              
 
-my_ScratchRAM : ScratchRAM
+my_ScratchRAM: ScratchRAM
     port map ( DATA_IN  => s_scr_din,
            ADR      => s_scr_addr,
            WE       => s_scr_we,
            CLK      => clk,
            DATA_OUT => s_scr_dout);
 
-   my_regfile: RegisterFile 
+my_regfile: RegisterFile 
    port map ( D_IN   => s_rf_din,   
               DX_OUT => s_dx_out,   
               DY_OUT => s_dy_out,   
@@ -350,7 +354,7 @@ my_ScratchRAM : ScratchRAM
               CLK    => clk); 
 
 
-   my_PC: program_counter 
+my_PC: program_counter 
    port map (
            FROM_STACK  => s_scr_dout,
            FROM_IMMED  => s_ir_12_3,
@@ -362,7 +366,7 @@ my_ScratchRAM : ScratchRAM
            CLK         => clk,
            PC_COUNT    => s_pc_count);
 
-    my_SCR_DATA_MUX : SCR_DATA_MUX 
+my_SCR_DATA_MUX: SCR_DATA_MUX 
     port map (
             DX   => s_dx_out,
             PC_COUNT   => s_pc_count,
@@ -370,14 +374,14 @@ my_ScratchRAM : ScratchRAM
             DATA_IN   => s_scr_din);
    
    
-   my_FlagReg_Z : FlagReg_Z
-   port map ( IN_FLAG   => s_alu_z, --flag input
+my_FlagReg_Z: FlagReg_Z
+   port map ( IN_FLAG   => s_z_mux_out, --flag input
               LD        => s_flg_z_ld, --load the out_flag with the in_flag value
               CLK       => clk, --system clock
               OUT_FLAG  => s_z_flag); --flag output
        
 
-my_int_input : int_input
+my_int_input: int_input
      Port map(INT_in => INT,
            I_set => s_i_flag_set,
            I_clr => s_i_flag_clr,
@@ -386,8 +390,8 @@ my_int_input : int_input
   
 
 
-my_FlagReg_C : FlagReg_C
-    Port map( IN_FLAG   => s_alu_c, --flag input
+my_FlagReg_C: FlagReg_C
+    Port map( IN_FLAG   => s_c_mux_out, --flag input
            LD        => s_flg_c_ld, --load the out_flag with the in_flag value
            SET       => s_flg_c_set, --set the flag to '1'
            CLR       => s_flg_c_Clr, --clear the flag to '0'
@@ -395,7 +399,7 @@ my_FlagReg_C : FlagReg_C
            OUT_FLAG  => s_c_flag); --flag output
            
            
-my_Stack_Pointer : Stack_Pointer
+my_Stack_Pointer: Stack_Pointer
     port map (RST => s_rst, 
                LD => s_sp_ld,
                INCR => s_sp_incr,
@@ -404,9 +408,34 @@ my_Stack_Pointer : Stack_Pointer
                DATA  => s_dx_out,
                SP_OUT  => s_sp_data_out);
                
---IO_STRB <= s_IO_STRB;               
+my_c_flag_mux:  flag_mux 
+    port map (Data_In => s_alu_c,
+              Flag_Sel => s_flg_ld_sel,
+              Shad_Out => s_flg_shad_c_out,
+              Data_Out => s_c_mux_out);
+
+my_z_flag_mux:  flag_mux 
+    port map (Data_In => s_alu_z,
+              Flag_Sel => s_flg_ld_sel,
+              Shad_Out => s_flg_shad_z_out,
+              Data_Out => s_z_mux_out);
+               
+my_shad_flag_reg_z: Shad_FlagReg_Z 
+    Port map ( IN_FLAG  => s_z_flag,
+               LD       => s_flg_shad_ld,
+               CLK      => s_clk,
+               OUT_FLAG => s_flg_shad_z_out);
+ 
+               
+my_shad_flag_reg_c: Shad_FlagReg_C 
+    Port map ( IN_FLAG  => s_c_flag,
+               LD       => s_flg_shad_ld,       
+               CLK      => s_clk,
+               OUT_FLAG => s_flg_shad_c_out); --flag output
+    
+
+
 out_port <= s_dx_out;
 port_id <= s_ir_7_0;
-
 
 end Behavioral;
