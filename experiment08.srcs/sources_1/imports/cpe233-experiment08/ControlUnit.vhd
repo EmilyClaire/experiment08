@@ -91,8 +91,6 @@ begin
    
    comb_p: process (sig_OPCODE_7, PS, NS)
    
-   variable s_I_Set : std_logic;
-   
    begin
      
     -- This is the default block for all signals set in the STATE cases.  Note that any output values desired 
@@ -101,7 +99,7 @@ begin
     -- statement.  We have a case statement for CPU states and then an embedded case statement for OPCODE 
     -- resolution. 
 
-    PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+    PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';      I_SET          <= '0';
     PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 	PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -140,7 +138,7 @@ begin
 				-- to be different from these values shown below will be assigned in the individual case statements for 
 				-- each opcode.
 				
-				PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+				PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';      I_SET          <= '0';
 				PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 				PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 				                           ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -160,7 +158,7 @@ begin
 					-- ADD R-imm -------------------
            when "1010000" | "1010001" | "1010010" | "1010011" =>   
            
-            PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     s_I_SET          := '0';
+            PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
            PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
            PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';
                                       ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -177,7 +175,7 @@ begin
 					-- ADD R-R -------------------
   when "0000100" =>   
   
-  PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     s_I_SET          := '0';
+  PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
   PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
   PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                              ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -191,7 +189,7 @@ begin
   					-- ADDC R-Imm -------------------
 when "1010100" | "1010101" | "1010110" |"1010111" =>   
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0001"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -202,7 +200,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
   					-- ADDC R-R -------------------
 when "0000101" =>   
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
            ALU_SEL        <= "0001";                               FLAG_LD_SEL    <= '0';
@@ -216,7 +214,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
   					-- AND R-R -------------------
 when "0000000" =>   
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "0101"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -229,7 +227,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';
     					-- AND R-Imm -------------------
 when "1000000" | "1000001" | "1000010" |"1000011" =>   
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "0101"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -241,7 +239,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';
     					-- ASR  -------------------
 when "0100100" =>   
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '1';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "1101"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -260,7 +258,7 @@ else
     PC_LD <= '0';
 end if;
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -279,7 +277,7 @@ else
     PC_LD <= '0';
 end if;
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -298,7 +296,7 @@ else
     PC_LD <= '0';
 end if;
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -917,7 +915,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
             -- repeat the default block here to avoid incompletely specified outputs and hence avoid
             -- the problem of inadvertently created latches within the synthesized system.
 			
-            PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     s_I_SET        := '0';
+            PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET        <= '0';
             PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
             PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                        ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
