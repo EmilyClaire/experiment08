@@ -61,7 +61,7 @@ end CONTROL_UNIT;
 
 architecture Behavioral of CONTROL_UNIT is
 
-   type state_type is (ST_init, ST_fet, ST_exec);
+   type state_type is (ST_init, ST_fet, ST_exec, ST_Int);
       signal PS,NS : state_type;
 	
 	
@@ -82,7 +82,12 @@ begin
 
 
    comb_p: process (sig_OPCODE_7, PS, NS)
+   
+   variable s_I_Set : std_logic;
+   
    begin
+    
+    
     
     -- This is the default block for all signals set in the STATE cases.  Note that any output values desired 
     -- to be different from these values shown below will be assigned in the individual case statements for 
@@ -120,7 +125,12 @@ begin
 			
         -- STATE: the execute cycle ---------------------------------
 		when ST_exec => 
-			NS <= ST_fet;
+			
+			
+			--NS <= ST_fet;
+			
+			
+				
 				
 				-- This is the default block for all signals set in the OPCODE cases.  Note that any output values desired 
 				-- to be different from these values shown below will be assigned in the individual case statements for 
@@ -816,6 +826,9 @@ SCR_ADDR_SEL   <=  "00";      FLAG_Z_CLR     <= '0';
 IO_STRB        <= '1';     PC_RST            <= '0'; 
 
 
+
+
+
     					-- RETIE  -------------------
 when "0110111" =>   
 
@@ -893,6 +906,14 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
 				  
            end case;
 
+            
+
+            if (I_SET = '1') then
+                NS <= ST_Int;
+            else
+                NS <= ST_fet;
+            end if;
+
           when others => 
 			   NS <= ST_fet;
 			    
@@ -913,7 +934,11 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
             IO_STRB        <= '0';     PC_RST            <= '0'; 
 			
 	    end case;
+	     
+	     
+	    I_SET <= S_I_Set;     
    end process comb_p;
+   
 end Behavioral;
 
 
