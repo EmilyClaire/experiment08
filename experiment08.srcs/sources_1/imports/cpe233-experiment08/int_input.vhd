@@ -21,19 +21,18 @@ begin
     process(clk) is
     begin
     
+    
+    
     if rising_edge(clk) then
         if (i_clr = '1') then
             flip_flop_out <= '0';
         elsif (i_set = '1') then
             flip_flop_out <= '1';
-            
         end if;
     end if;
 
-
 end process;
 
-int_out <= flip_flop_out and int_in;
-
+INT_out <= flip_flop_out and INT_in;
 
 end Behavioral;

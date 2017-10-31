@@ -52,8 +52,6 @@ entity CONTROL_UNIT is
            FLAG_Z_SET    : out  STD_LOGIC;
            FLAG_Z_CLR    : out  STD_LOGIC;
 		   
-           I_FLAG_SET    : out  STD_LOGIC;
-           I_FLAG_CLR    : out  STD_LOGIC;
            I_SET         : out  STD_LOGIC;
            I_CLR         : out  STD_LOGIC;
 		   IO_STRB       : out  STD_LOGIC);
@@ -75,10 +73,6 @@ begin
 	begin
 	   if (RESET = '1') then
 		  PS <= ST_init;
-	   elsif (INT = '1') then
-		  if(rising_edge(CLK)) then
-		      PS <= ST_int;
-		  end if;
 	   elsif (rising_edge(CLK)) then
 		      PS <= NS;
 		end if;
@@ -121,12 +115,33 @@ begin
 		    NS <= ST_exec;	
 			
 			  PC_INC <= '1';
+		
+-----------------------------------------		           
+          when ST_int =>
+             NS <= ST_fet;
+             
+             
+             PC_LD          <= '1';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET        <= '0';
+             PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET    <= '0';     I_CLR          <= '1';
+             PC_MUX_SEL     <= "10";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
+                                        ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
+             SP_LD          <= '0';     
+             FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '1';
+             SP_INCR        <= '0';  
+             SCR_WR         <= '0';     FLAG_Z_SET     <= '0';      SCR_DATA_SEL <= '1';
+             SP_DECR        <= '1'; 
+             SCR_ADDR_SEL   <=  "11";   FLAG_Z_CLR     <= '0';                 
+                                                                                   
+             IO_STRB        <= '0';     PC_RST         <= '0'; 
+             
 			
         -- STATE: the execute cycle ---------------------------------
 		when ST_exec => 
-
-			     NS <= ST_fet;
-			
+                if(INT = '1') then
+                    NS <= ST_int;
+                else
+			        NS <= ST_fet;
+			    end if;
 				
 				
 				-- This is the default block for all signals set in the OPCODE cases.  Note that any output values desired 
@@ -886,24 +901,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
 				  IO_STRB        <= '0';     PC_RST            <= '0';      SCR_DATA_SEL <= '0';
 				  
            end case;
-           
-          when st_int =>
-	      NS <= ST_fet;
-	      
-	      
-          PC_LD          <= '1';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET        <= '0';
-          PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET    <= '0';     I_CLR          <= '1';
-          PC_MUX_SEL     <= "10";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
-                                     ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
-          SP_LD          <= '0';     
-          FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '1';
-          SP_INCR        <= '0';  
-          SCR_WR         <= '0';     FLAG_Z_SET     <= '0';      SCR_DATA_SEL <= '1';
-          SP_DECR        <= '1'; 
-          SCR_ADDR_SEL   <=  "11";   FLAG_Z_CLR     <= '0';                 
-                                                                                
-          IO_STRB        <= '0';     PC_RST         <= '0'; 
-          
+
           when others => 
 			   NS <= ST_fet;
 			    

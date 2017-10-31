@@ -334,8 +334,8 @@ my_cu: CONTROL_UNIT
               FLAG_Z_LD     => s_flg_z_ld,
               IO_STRB => IO_STRB,
  
-              I_FLAG_SET    => s_I_FLAG_SET, 
-              I_FLAG_CLR    => s_I_FLAG_CLR);              
+              I_SET    => s_I_FLAG_SET, 
+              I_CLR    => s_I_FLAG_CLR);              
 
 my_ScratchRAM: ScratchRAM
     port map ( DATA_IN  => s_scr_din,
@@ -388,8 +388,6 @@ my_int_input: int_input
            clk => clk,
            INT_out => s_int_out);
   
-
-
 my_FlagReg_C: FlagReg_C
     Port map( IN_FLAG   => s_c_mux_out, --flag input
            LD        => s_flg_c_ld, --load the out_flag with the in_flag value

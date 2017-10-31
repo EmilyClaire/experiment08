@@ -26,7 +26,7 @@
     <Option Name="IPUserFilesDir" Val="$PPRDIR/experiment08.ip_user_files"/>
     <Option Name="IPStaticSourceDir" Val="$PPRDIR/experiment08.ip_user_files/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
-    <Option Name="WTXSimLaunchSim" Val="51"/>
+    <Option Name="WTXSimLaunchSim" Val="64"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -55,6 +55,14 @@
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/mux.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/mux.vhd"/>
+          <Attr Name="ImportTime" Val="1508348164"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ControlUnit.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ControlUnit.vhd"/>
           <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -119,7 +127,7 @@
       <File Path="$PSRCDIR/sources_1/imports/cpe 233/prog_rom.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1509418185"/>
+          <Attr Name="ImportTime" Val="1509419929"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -158,14 +166,6 @@
       </File>
       <File Path="$PSRCDIR/sources_1/new/flag_mux.vhd">
         <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ControlUnit.vhd">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ControlUnit.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>

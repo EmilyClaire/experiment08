@@ -52,11 +52,11 @@ begin
    stim_proc: process
    begin       
       rst_tb <= '0';     
-      wait for 4000ns;
-      rst_tb <= '1';
+      wait for 1000ns;
+      int_tb <= '1';
       wait for 50ns;
-      rst_tb <='0';
-      wait for 4000ns;
+      int_tb <= '0';
+      wait for 1000ns;
 --      rst_tb <= '1';
 --      wait for 50ns;
 --      rst_tb <= '0';
