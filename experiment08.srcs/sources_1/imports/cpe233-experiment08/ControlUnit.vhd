@@ -75,20 +75,15 @@ begin
 	begin
 	   if (RESET = '1') then
 		  PS <= ST_init;
-		elsif (rising_edge(CLK)) then 
-	      PS <= NS;
+		elsif (rising_edge(CLK)) then
+		  if (INT = '1') then
+		      PS <= ST_INT;
+		  else
+    	      PS <= NS;
+    	  end if;
 		end if;
 	end process sync_p;
 
-    sync_int: process (INT, CLK)
-    begin
-        if (rising_edge(CLK)) then
-            if(INT = '1') then
-                NS <= ST_int;
-            end if;
-         end if;
-    end process sync_int;
-   
    comb_p: process (sig_OPCODE_7, PS, NS)
    
    begin
