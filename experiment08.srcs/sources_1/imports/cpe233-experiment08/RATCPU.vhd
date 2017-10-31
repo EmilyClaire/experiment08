@@ -93,8 +93,6 @@ architecture Behavioral of RAT_CPU is
               FLAG_Z_SET    : out  STD_LOGIC;
               FLAG_Z_CLR    : out  STD_LOGIC;
               
-              I_FLAG_SET    : out  STD_LOGIC;
-              I_FLAG_CLR    : out  STD_LOGIC;
               I_SET         : out  STD_LOGIC;
               I_CLR         : out  STD_LOGIC;
               IO_STRB       : out  STD_LOGIC);

@@ -125,10 +125,10 @@ begin
              PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET    <= '0';     I_CLR          <= '1';
              PC_MUX_SEL     <= "10";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
                                         ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
-             SP_LD          <= '0';     
+             SP_LD          <= '1';     
              FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '1';
              SP_INCR        <= '0';  
-             SCR_WR         <= '0';     FLAG_Z_SET     <= '0';      SCR_DATA_SEL <= '1';
+             SCR_WR         <= '1';     FLAG_Z_SET     <= '0';      SCR_DATA_SEL <= '1';
              SP_DECR        <= '1'; 
              SCR_ADDR_SEL   <=  "11";   FLAG_Z_CLR     <= '0';                 
                                                                                    
