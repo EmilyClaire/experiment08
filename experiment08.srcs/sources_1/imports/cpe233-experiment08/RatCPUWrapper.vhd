@@ -16,7 +16,8 @@ use IEEE.NUMERIC_STD.ALL;
 entity RAT_wrapper is
     Port ( LEDS     : out   STD_LOGIC_VECTOR (7 downto 0);
            SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
-           RESET      : in    STD_LOGIC;
+           RESET    : in    STD_LOGIC;
+           INT      : in    STD_LOGIC;
            CLK      : in    STD_LOGIC);
 end RAT_wrapper;
 
@@ -68,7 +69,7 @@ begin
               PORT_ID  => s_port_id,
               RST    => RESET,
               IO_STRB  => s_load,
-              INT   => '0',  -- s_interrupt
+              INT   => INT,  -- s_interrupt
               CLK      => CLK);
    -------------------------------------------------------------------------------
 

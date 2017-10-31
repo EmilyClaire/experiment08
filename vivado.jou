@@ -1,12 +1,11 @@
 #-----------------------------------------------------------
-# Vivado v2017.2 (64-bit)
-# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
-# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
-# Start of session at: Mon Oct 30 09:32:59 2017
-# Process ID: 42064
-# Current directory: C:/Users/eclai/Desktop/cpe 233/experiment08
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent52704 C:\Users\eclai\Desktop\cpe 233\experiment08\experiment08.xpr
-# Log file: C:/Users/eclai/Desktop/cpe 233/experiment08/vivado.log
-# Journal file: C:/Users/eclai/Desktop/cpe 233/experiment08\vivado.jou
+# Vivado v2016.2 (64-bit)
+# SW Build 1577090 on Thu Jun  2 16:32:40 MDT 2016
+# IP Build 1577682 on Fri Jun  3 12:00:54 MDT 2016
+# Start of session at: Tue Oct 31 02:04:16 2017
+# Process ID: 8240
+# Current directory: C:/Users/Donald/Documents/experiment08
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent11260 C:\Users\Donald\Documents\experiment08\experiment08.xpr
+# Log file: C:/Users/Donald/Documents/experiment08/vivado.log
+# Journal file: C:/Users/Donald/Documents/experiment08\vivado.jou
 #-----------------------------------------------------------
-start_gui
