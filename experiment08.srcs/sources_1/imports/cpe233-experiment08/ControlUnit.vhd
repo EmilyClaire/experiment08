@@ -80,15 +80,21 @@ begin
 		end if;
 	end process sync_p;
 
-
+    sync_int: process (INT, CLK)
+    begin
+        if (rising_edge(CLK)) then
+            if(INT = '1') then
+                NS <= ST_int;
+            end if;
+         end if;
+    end process sync_int;
+   
    comb_p: process (sig_OPCODE_7, PS, NS)
    
    variable s_I_Set : std_logic;
    
    begin
-    
-    
-    
+     
     -- This is the default block for all signals set in the STATE cases.  Note that any output values desired 
     -- to be different from these values shown below will be assigned in the individual case statements for 
 	-- each STATE.  Please note that that this "default" set of values must be stated for each individual case
@@ -121,14 +127,12 @@ begin
          when ST_fet => 
 		    NS <= ST_exec;	
 			
-			   PC_INC <= '1';
+			  PC_INC <= '1';
 			
         -- STATE: the execute cycle ---------------------------------
 		when ST_exec => 
-			
-			
-			--NS <= ST_fet;
-			
+
+			     NS <= ST_fet;
 			
 				
 				
@@ -312,7 +316,7 @@ else
     PC_LD <= '0';
 end if;
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -327,7 +331,7 @@ when "0010001" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';   PC_LD          <= '1';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';   PC_LD          <= '1';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -341,7 +345,7 @@ when "0110000" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -356,7 +360,7 @@ when "0001000" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '1';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '1';       I_SET          <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0100"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -370,7 +374,7 @@ when "1100000" | "1100001" | "1100010" | "1100011" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '1';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '1';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0100"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -384,7 +388,7 @@ when "1100100" | "1100101" | "1100110" | "1100111" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "11";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -398,7 +402,7 @@ when "0001010" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "01";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -412,9 +416,7 @@ IO_STRB        <= '0';     PC_RST         <= '0'; 	    SCR_DATA_SEL   <= '0';
     					-- LD R-Imm  -------------------
 when "1110000" | "1110001" | "1110010" | "1110011" =>   
 
-
-
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "01";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -422,14 +424,10 @@ SP_INCR        <= '0';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
 SP_DECR        <= '0';     SCR_ADDR_SEL   <= "01";      FLAG_Z_CLR     <= '0';                                                          
 IO_STRB        <= '0';     PC_RST         <= '0'; 	    SCR_DATA_SEL   <= '0';
 
-
-
     					-- LSL  -------------------
 when "0100000" =>   
 
-
-
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "1001"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -444,7 +442,7 @@ when "0100001" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "1010"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -459,7 +457,7 @@ when "0000001" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "0110"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -475,7 +473,7 @@ when "1000100" | "1000101" | "1000110" | "1000111" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "0110"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -492,7 +490,7 @@ when "0100110" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "01";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -507,7 +505,7 @@ when "0100101" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -523,7 +521,7 @@ when "0110010" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '1';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '1';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "01";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -540,7 +538,7 @@ when "0100010" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "1011"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -556,7 +554,7 @@ when "0100011" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "1100"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -572,7 +570,7 @@ when "0110001" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '1';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -588,7 +586,7 @@ when "0001011" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -603,7 +601,7 @@ when "1110100" | "1110101" | "1110110" |"1110111" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET        <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -618,7 +616,7 @@ when "0000110" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';     PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0010"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -632,7 +630,7 @@ when "1011000" | "1011001" | "1011010" | "1011011" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0010"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -648,7 +646,7 @@ when "0000111" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET        <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0011"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -665,7 +663,7 @@ when "1011100" | "1011101" | "1011110" | "1011111" =>
 
 
 
-RF_WR          <= '1';     FLAG_C_LD      <= '1';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '1';     FLAG_C_LD      <= '1';       I_SET          <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0011"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -680,7 +678,7 @@ when "0000011" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET        <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "1000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -695,7 +693,7 @@ when "1001100" | "1001101" | "1001110" | "1001111" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';   PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';   PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '1';     ALU_SEL        <= "1000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -709,7 +707,7 @@ when "0101000" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET          := '0';    PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '0';    PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '1';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -724,7 +722,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
 -- BRN -------------------
 when "0010000" =>   
              
-PC_LD          <= '1';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '1';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET         <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -739,7 +737,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
 
 -- EXOR reg-reg  --------
 when "0000010" =>					
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '1';
 ALU_SEL        <= "0111";                               FLAG_LD_SEL    <= '0';
@@ -756,7 +754,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
 -- EXOR reg-immed  ------
 when "1001000" | "1001001" | "1001010" | "1001011" =>					
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '1';
 ALU_SEL        <= "0111";                               FLAG_LD_SEL    <= '0';
@@ -776,7 +774,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
 when "0001001" =>  
                 
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 ALU_SEL        <= "1110";                               FLAG_LD_SEL    <= '0';
@@ -795,7 +793,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
 when "1101100" | "1101101" | "1101110" | "1101111" =>  
                 
 
-PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '1';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '1';       FLAG_C_CLR     <= '0';
 ALU_SEL        <= "1110";                               FLAG_LD_SEL    <= '0';
@@ -812,7 +810,7 @@ IO_STRB        <= '0';     PC_RST            <= '0';
 --OUT
 when "1101000" | "1101001" | "1101010" | "1101011" =>             
 
-PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     s_I_SET          := '0';
+PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -825,36 +823,26 @@ SCR_ADDR_SEL   <=  "00";      FLAG_Z_CLR     <= '0';
                                                                                      
 IO_STRB        <= '1';     PC_RST            <= '0'; 
 
-
-
-
-
     					-- RETIE  -------------------
 when "0110111" =>   
 
-
-
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET        := '1';     PC_LD          <= '1';
+RF_WR          <= '0';     FLAG_C_LD      <= '1';       I_SET          <= '1';     PC_LD          <= '1';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
-SP_LD          <= '1';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '1';     FLAG_LD_SEL    <= '0';
+SP_LD          <= '1';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '1';
 SP_INCR        <= '1';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-SP_DECR        <= '0';     SCR_ADDR_SEL   <= "00";      FLAG_Z_CLR     <= '0';                                                          
+SP_DECR        <= '0';     SCR_ADDR_SEL   <= "10";      FLAG_Z_CLR     <= '0';                                                          
 IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
-
-
 
     					-- RETID  -------------------
 when "0110110" =>   
 
-
-
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET        := '0';     PC_LD          <= '1';
+RF_WR          <= '0';     FLAG_C_LD      <= '1';       I_SET          <= '0';     PC_LD          <= '1';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
-SP_LD          <= '1';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '1';     FLAG_LD_SEL    <= '0';
+SP_LD          <= '1';     FLAG_Z_LD      <= '1';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '1';
 SP_INCR        <= '1';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
-SP_DECR        <= '0';     SCR_ADDR_SEL   <= "00";      FLAG_Z_CLR     <= '0';                                                          
+SP_DECR        <= '0';     SCR_ADDR_SEL   <= "10";      FLAG_Z_CLR     <= '0';                                                          
 IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
 
 
@@ -863,7 +851,7 @@ when "0110100" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET        := '1';     PC_LD          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET          <= '1';     PC_LD          <= '0';
 PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
@@ -877,8 +865,8 @@ when "0110101" =>
 
 
 
-RF_WR          <= '0';     FLAG_C_LD      <= '0';       s_I_SET        := '0';     PC_LD          <= '0';
-PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '0';
+RF_WR          <= '0';     FLAG_C_LD      <= '0';       I_SET        <= '0';     PC_LD          <= '0';
+PC_INC         <= '0';     RF_WR_SEL      <= "00";      FLAG_C_SET     <= '0';     I_CLR          <= '1';
 PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';     ALU_SEL        <= "0000"; 
 SP_LD          <= '0';     FLAG_Z_LD      <= '0';       FLAG_SHAD_LD   <= '0';     FLAG_LD_SEL    <= '0';
 SP_INCR        <= '0';     SCR_WR         <= '0';       FLAG_Z_SET     <= '0';
@@ -891,7 +879,7 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
                   -- repeat the default block here to avoid incompletely specified outputs and hence avoid
                   -- the problem of inadvertently created latches within the synthesized system.						
 
-				  PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     s_I_SET        := '0';
+				  PC_LD          <= '0';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET        <= '0';
 				  PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET     <= '0';     I_CLR          <= '0';
 				  PC_MUX_SEL     <= "00";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
 				                             ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
@@ -905,15 +893,24 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
 				  IO_STRB        <= '0';     PC_RST            <= '0';      SCR_DATA_SEL <= '0';
 				  
            end case;
-
-            
-
-            if (s_I_SET = '1') then
-                NS <= ST_Int;
-            else
-                NS <= ST_fet;
-            end if;
-
+           
+          when st_int =>
+	      NS <= ST_fet;
+	      
+	      
+          PC_LD          <= '1';     RF_WR          <= '0';       FLAG_C_LD      <= '0';     I_SET        <= '0';
+          PC_INC         <= '0';     RF_WR_SEL      <= "00";       FLAG_C_SET    <= '0';     I_CLR          <= '1';
+          PC_MUX_SEL     <= "10";    ALU_OPY_SEL    <= '0';       FLAG_C_CLR     <= '0';
+                                     ALU_SEL        <= "0000";                               FLAG_LD_SEL    <= '0';
+          SP_LD          <= '0';     
+          FLAG_Z_LD      <= '0';     FLAG_SHAD_LD   <= '1';
+          SP_INCR        <= '0';  
+          SCR_WR         <= '0';     FLAG_Z_SET     <= '0';      SCR_DATA_SEL <= '1';
+          SP_DECR        <= '1'; 
+          SCR_ADDR_SEL   <=  "11";   FLAG_Z_CLR     <= '0';                 
+                                                                                
+          IO_STRB        <= '0';     PC_RST         <= '0'; 
+          
           when others => 
 			   NS <= ST_fet;
 			    
@@ -934,12 +931,9 @@ IO_STRB        <= '0';     PC_RST         <= '0';       SCR_DATA_SEL   <= '0';
             IO_STRB        <= '0';     PC_RST            <= '0'; 
 			
 	    end case;
-	     
-	     
-	    I_SET <= S_I_Set;     
+	     	     
    end process comb_p;
    
 end Behavioral;
-
 
 
