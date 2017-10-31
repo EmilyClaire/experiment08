@@ -22,10 +22,6 @@ begin
         if( rising_edge(CLK) ) then
             if( LD = '1' ) then
                 OUT_FLAG <= IN_FLAG;
-            --elsif( SET = '1' ) then
-            --    OUT_FLAG <= '1';
-            elsif( CLR = '1' ) then
-                OUT_FLAG <= '0';
          end if;
       end if;
     end process;				

@@ -9,3 +9,6 @@
 # Log file: C:/Users/Donald/Documents/experiment08/vivado.log
 # Journal file: C:/Users/Donald/Documents/experiment08\vivado.jou
 #-----------------------------------------------------------
+start_gui
+open_project C:/Users/Donald/Documents/experiment08/experiment08.xpr
+update_compile_order -fileset sources_1
