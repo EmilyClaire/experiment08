@@ -19,6 +19,7 @@
     <Option Name="TargetLanguage" Val="VHDL"/>
     <Option Name="SimulatorLanguage" Val="VHDL"/>
     <Option Name="BoardPart" Val=""/>
+    <Option Name="SourceMgmtMode" Val="DisplayOnly"/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
     <Option Name="EnableCoreContainer" Val="FALSE"/>
@@ -234,7 +235,6 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/RatCPUWrapper.vhd">
         <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/RatCPUWrapper.vhd"/>
           <Attr Name="ImportTime" Val="1508348165"/>
           <Attr Name="UsedIn" Val="synthesis"/>

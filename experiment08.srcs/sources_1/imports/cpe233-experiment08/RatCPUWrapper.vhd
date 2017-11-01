@@ -36,7 +36,7 @@ architecture Behavioral of RAT_wrapper is
    -- OUTPUT PORT IDS ------------------------------------------------------------
    -- In future labs you can add more port IDs
    CONSTANT LEDS_ID       : STD_LOGIC_VECTOR (7 downto 0) := X"40";
-   CONSTANT SSEG_CNTRL_ID : STD_LOGIC_VECTOR (7 downto 0) := x"60";
+   CONSTANT SSEG_CNTR_ID : STD_LOGIC_VECTOR (7 downto 0) := x"60";
    CONSTANT SSEG_VAL_ID:    STD_LOGIC_VECTOR (7 downto 0) := x"80";
    -------------------------------------------------------------------------------
 
@@ -80,6 +80,10 @@ architecture Behavioral of RAT_wrapper is
    signal s_output_port : std_logic_vector (7 downto 0);
    signal s_port_id     : std_logic_vector (7 downto 0) := x"20";
    signal s_load        : std_logic;
+   signal s_sseg_cntr   : std_logic_vector (7 downto 0);
+   signal s_sseg_val    : std_logic_vector (7 downto 0);
+   signal s_cnt1_assign : std_logic_vector (7 downto 0);
+   signal s_dbn_int     : std_logic;
    --signal s_interrupt   : std_logic; -- not yet used
    
    -- Register definitions for output devices ------------------------------------
@@ -96,27 +100,29 @@ begin
               PORT_ID  => s_port_id,
               RST    => RESET,
               IO_STRB  => s_load,
-              INT   => INT,  -- s_interrupt
+              INT   => s_dbn_int,  -- s_interrupt
               CLK      => CLK);
               
-              
+     
+    s_cnt1_assign <= "000000" & s_SSEG_val;
+    
     my_sseg_dec_uni : sseg_dec_uni
-    port map (       COUNT1 => "000000" & signalthingy,
-                     COUNT2 => signalthiny,
-                     SEL => "00",
-                     dp_oe => '0',
-                     dp => "00",                       
+    port map (       COUNT1 => s_cnt1_assign,
+                     COUNT2 => s_SSEG_val,
+                     SEL => s_SSEG_cntr (7 downto 6),
+                     dp_oe => s_sseg_cntr(2),
+                     dp => s_sseg_cntr (5 downto 4),                       
                      CLK => CLK,
-                     SIGN => '0',
-                     VALID => '1',
+                     SIGN => s_sseg_cntr(1),
+                     VALID => s_sseg_cntr(0),
                      DISP_EN => an,
                      SEGMENTS => seg);
               
               
-    entity db_1shot_FSM is
-        port map ( A    => ,
-                   CLK  => ,
-                   A_DB => ,);
+    my_db_1shot_FSM : db_1shot_FSM 
+        port map ( A    => INT,
+                   CLK  => clk,
+                   A_DB => s_dbn_int);
                    
    -------------------------------------------------------------------------------
 
@@ -153,9 +159,9 @@ begin
             if (s_port_id = LEDS_ID) then
                r_LEDS <= s_output_port;
             elsif(s_port_id = SSEG_CNTR_ID) then
-                s_CNTRL_ID <= s_output_port;
+                s_sseg_CNTR <= s_output_port;
             elsif(s_port_id = SSEG_VAL_ID) then
-                s_VAL_ID <= s_output_port;
+                s_sseg_VAL <= s_output_port;
             end if;
            
          end if;
