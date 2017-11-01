@@ -46,6 +46,21 @@ architecture Behavioral of RAT_wrapper is
               INT   : in  STD_LOGIC;
               CLK      : in  STD_LOGIC);
    end component RAT_CPU;
+   
+   component sseg_dec_uni
+       Port (       COUNT1 : in std_logic_vector(13 downto 0); 
+                    COUNT2 : in std_logic_vector(7 downto 0);
+                       SEL : in std_logic_vector(1 downto 0);
+                           dp_oe : in std_logic;
+                        dp : in std_logic_vector(1 downto 0);                       
+                       CLK : in std_logic;
+                            SIGN : in std_logic;
+                           VALID : in std_logic;
+                   DISP_EN : out std_logic_vector(3 downto 0);
+                  SEGMENTS : out std_logic_vector(7 downto 0));
+   end component sseg_dec_uni;
+   
+   
    -------------------------------------------------------------------------------
 
    -- Signals for connecting RAT_CPU to RAT_wrapper -------------------------------
@@ -71,6 +86,20 @@ begin
               IO_STRB  => s_load,
               INT   => INT,  -- s_interrupt
               CLK      => CLK);
+              
+              
+    my_sseg_dec_uni : sseg_dec_uni
+    port map (       COUNT1 => ,
+                               COUNT2 => ,
+                                  SEL => ,
+                                      dp_oe => ,
+                                   dp => ,                       
+                                  CLK => ,
+                                       SIGN => ,
+                                      VALID => ,
+                              DISP_EN => ,
+                             SEGMENTS => );
+              end sseg_dec_uni;
    -------------------------------------------------------------------------------
 
 

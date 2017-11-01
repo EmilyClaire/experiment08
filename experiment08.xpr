@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="C:/Users/eclai/Desktop/cpe 233/experiment08/experiment08.xpr">
+<Project Version="7" Minor="14" Path="C:/Users/Donald/Documents/experiment08/experiment08.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="675eb680438444a6998d7745b31e49a9"/>
@@ -186,6 +186,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/new/7_Seg.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/RATCPU.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/RATCPU.vhd"/>
@@ -233,13 +239,6 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/7_Seg.vhd">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>

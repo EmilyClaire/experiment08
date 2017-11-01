@@ -82,11 +82,11 @@ architecture my_sseg of sseg_dec_uni is
    -- declaration of 8-bit binary to 2-digit BCD converter --
    component bin2bcdconv 
        Port ( BIN_CNT_IN : in std_logic_vector(13 downto 0);
-							SEL : in std_logic_vector(1 downto 0);
-                 LSD_OUT : out std_logic_vector(3 downto 0);
-                 MSD_OUT : out std_logic_vector(3 downto 0);
-                MMSD_OUT : out std_logic_vector(3 downto 0);
-					 LLSD_OUT : out std_logic_vector(3 downto 0));
+			  SEL : in std_logic_vector(1 downto 0);
+              LSD_OUT : out std_logic_vector(3 downto 0);
+              MSD_OUT : out std_logic_vector(3 downto 0);
+              MMSD_OUT : out std_logic_vector(3 downto 0);
+			  LLSD_OUT : out std_logic_vector(3 downto 0));
    end component;
 
 	component clk_div
