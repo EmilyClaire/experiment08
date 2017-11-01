@@ -36,6 +36,8 @@ architecture Behavioral of RAT_wrapper is
    -- OUTPUT PORT IDS ------------------------------------------------------------
    -- In future labs you can add more port IDs
    CONSTANT LEDS_ID       : STD_LOGIC_VECTOR (7 downto 0) := X"40";
+   CONSTANT SSEG_CNTRL_ID : STD_LOGIC_VECTOR (7 downto 0) := x"60";
+   CONSTANT SSEG_VAL_ID:    STD_LOGIC_VECTOR (7 downto 0) := x"80";
    -------------------------------------------------------------------------------
 
    -- Declare RAT_CPU ------------------------------------------------------------
@@ -99,8 +101,8 @@ begin
               
               
     my_sseg_dec_uni : sseg_dec_uni
-    port map (       COUNT1 => ,
-                     COUNT2 => ,
+    port map (       COUNT1 => "000000" & signalthingy,
+                     COUNT2 => signalthiny,
                      SEL => "00",
                      dp_oe => '0',
                      dp => "00",                       
@@ -150,6 +152,10 @@ begin
             -- the register definition for the LEDS
             if (s_port_id = LEDS_ID) then
                r_LEDS <= s_output_port;
+            elsif(s_port_id = SSEG_CNTR_ID) then
+                s_CNTRL_ID <= s_output_port;
+            elsif(s_port_id = SSEG_VAL_ID) then
+                s_VAL_ID <= s_output_port;
             end if;
            
          end if;
