@@ -14,10 +14,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
-    Port ( LEDS     : out   STD_LOGIC_VECTOR (7 downto 0);
+    Port ( --LEDS     : out   STD_LOGIC_VECTOR (7 downto 0);
              an     : out   STD_LOGIC_VECTOR (3 downto 0);
              seg    : out   STD_LOGIC_VECTOR (7 downto 0);
-           SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
+           --SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
            INT      : in    STD_LOGIC;
            CLK      : in    STD_LOGIC);
@@ -123,7 +123,7 @@ begin
         port map ( A    => INT,
                    CLK  => clk,
                    A_DB => s_dbn_int);
-                   
+                                   
    -------------------------------------------------------------------------------
 
 
