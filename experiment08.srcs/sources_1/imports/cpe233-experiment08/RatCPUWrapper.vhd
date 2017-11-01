@@ -15,6 +15,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity RAT_wrapper is
     Port ( LEDS     : out   STD_LOGIC_VECTOR (7 downto 0);
+             an     : out   STD_LOGIC_VECTOR (3 downto 0);
+             seg    : out   STD_LOGIC_VECTOR (7 downto 0);
            SWITCHES : in    STD_LOGIC_VECTOR (7 downto 0);
            RESET    : in    STD_LOGIC;
            INT      : in    STD_LOGIC;
@@ -51,11 +53,11 @@ architecture Behavioral of RAT_wrapper is
        Port (       COUNT1 : in std_logic_vector(13 downto 0); 
                     COUNT2 : in std_logic_vector(7 downto 0);
                        SEL : in std_logic_vector(1 downto 0);
-                           dp_oe : in std_logic;
+                     dp_oe : in std_logic;
                         dp : in std_logic_vector(1 downto 0);                       
                        CLK : in std_logic;
-                            SIGN : in std_logic;
-                           VALID : in std_logic;
+                      SIGN : in std_logic;
+                     VALID : in std_logic;
                    DISP_EN : out std_logic_vector(3 downto 0);
                   SEGMENTS : out std_logic_vector(7 downto 0));
    end component sseg_dec_uni;
@@ -105,8 +107,8 @@ begin
                      CLK => CLK,
                      SIGN => '0',
                      VALID => '1',
-                     DISP_EN => ,
-                     SEGMENTS => );
+                     DISP_EN => an,
+                     SEGMENTS => seg);
               
               
     entity db_1shot_FSM is
