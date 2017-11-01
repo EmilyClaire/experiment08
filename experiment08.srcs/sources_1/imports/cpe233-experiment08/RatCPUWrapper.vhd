@@ -61,6 +61,14 @@ architecture Behavioral of RAT_wrapper is
    end component sseg_dec_uni;
    
    
+   
+   component db_1shot_FSM is
+       Port ( A    : in STD_LOGIC;
+              CLK  : in STD_LOGIC;
+              A_DB : out STD_LOGIC);
+   end component db_1shot_FSM;
+   
+   
    -------------------------------------------------------------------------------
 
    -- Signals for connecting RAT_CPU to RAT_wrapper -------------------------------
@@ -90,16 +98,22 @@ begin
               
     my_sseg_dec_uni : sseg_dec_uni
     port map (       COUNT1 => ,
-                               COUNT2 => ,
-                                  SEL => ,
-                                      dp_oe => ,
-                                   dp => ,                       
-                                  CLK => ,
-                                       SIGN => ,
-                                      VALID => ,
-                              DISP_EN => ,
-                             SEGMENTS => );
-              end sseg_dec_uni;
+                     COUNT2 => ,
+                     SEL => "00",
+                     dp_oe => '0',
+                     dp => "00",                       
+                     CLK => CLK,
+                     SIGN => '0',
+                     VALID => '1',
+                     DISP_EN => ,
+                     SEGMENTS => );
+              
+              
+    entity db_1shot_FSM is
+        port map ( A    => ,
+                   CLK  => ,
+                   A_DB => ,);
+                   
    -------------------------------------------------------------------------------
 
 

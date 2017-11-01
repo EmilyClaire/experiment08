@@ -44,6 +44,12 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/counter_for_one_shot.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/pc.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/pc.vhd"/>
@@ -60,10 +66,8 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ControlUnit.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM.vhd">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ControlUnit.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -170,6 +174,14 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ControlUnit.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ControlUnit.vhd"/>
+          <Attr Name="ImportTime" Val="1508348164"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/ALU_MUX.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/ALU_MUX.vhd"/>
@@ -192,6 +204,26 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM_TB.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/clk_div.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/clk_div.vhd"/>
+          <Attr Name="ImportTime" Val="1508348164"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/RATCPU.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/RATCPU.vhd"/>
@@ -202,45 +234,9 @@
       </File>
       <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/RatCPUWrapper.vhd">
         <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/RatCPUWrapper.vhd"/>
           <Attr Name="ImportTime" Val="1508348165"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/8_wrapper_tb.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/clk_div.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../cpe233-experiment08/clk_div.vhd"/>
-          <Attr Name="ImportTime" Val="1508348164"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/counter_for_one_shot.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM_TB.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/cpe233-experiment08/debounce_one_shot_FSM.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
