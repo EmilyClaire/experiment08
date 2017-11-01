@@ -1,28 +1,8 @@
---------------------------------------------------------------------------
---
--- Engineer: Jeff Gerfen
--- Create Date: 2016.02.26 
--- Design Name: counter
--- Module Name: counter
---
--- DESCRIPTION:
--- Simple up counter with synchronous load and synchronous reset controls.
---------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity counter is
     Port ( RST    : in  STD_LOGIC;
