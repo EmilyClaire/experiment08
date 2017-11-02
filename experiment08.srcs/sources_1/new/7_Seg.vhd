@@ -89,7 +89,7 @@ architecture my_sseg of sseg_dec_uni is
 			  LLSD_OUT : out std_logic_vector(3 downto 0));
    end component;
 
-	component clk_div
+	component clk_div_2
 		 Port (  clk : in std_logic;
 				  sclk : out std_logic);
 	end component;
@@ -124,7 +124,7 @@ begin
 					 LLSD_OUT => open); 
 				 
    -- instantiation of clock divider -----------------
-   my_clk: clk_div 
+   my_clk: clk_div_2 
 	port map (clk => clk,
 	          sclk => sclk ); 
 
@@ -570,12 +570,12 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 -----------------------------------------------------------------------
 -- Module to divide the clock 
 -----------------------------------------------------------------------
-entity clk_div is
+entity clk_div_2 is
     Port (  clk : in std_logic;
            sclk : out std_logic);
-end clk_div;
+end clk_div_2;
 
-architecture my_clk_div of clk_div is
+architecture my_clk_div_2 of clk_div_2 is
    constant max_count : integer := (2200);  
    signal tmp_clk : std_logic := '0'; 
 begin
@@ -592,6 +592,6 @@ begin
       end if; 
       sclk <= tmp_clk; 
    end process my_div; 
-end my_clk_div;
+end my_clk_div_2;
 
 
