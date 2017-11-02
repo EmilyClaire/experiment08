@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="C:/Users/Donald/Documents/experiment08/experiment08.xpr">
+<Project Version="7" Minor="14" Path="C:/Users/eclai/Desktop/cpe 233/experiment08/experiment08.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="675eb680438444a6998d7745b31e49a9"/>
@@ -132,7 +132,7 @@
       <File Path="$PSRCDIR/sources_1/imports/cpe 233/prog_rom.vhd">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/prog_rom.vhd"/>
-          <Attr Name="ImportTime" Val="1509593191"/>
+          <Attr Name="ImportTime" Val="1509602568"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
