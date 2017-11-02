@@ -117,7 +117,7 @@ begin
     
     my_sseg_dec_uni : sseg_dec_uni
     port map (       COUNT1 => s_cnt1_assign,
-                     COUNT2 => x"08",
+                     COUNT2 => s_sseg_val,
                      SEL => s_SSEG_cntr (7 downto 6),
                      dp_oe => s_sseg_cntr(2),
                      dp => s_sseg_cntr (5 downto 4),                       

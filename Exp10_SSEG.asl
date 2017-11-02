@@ -49,7 +49,7 @@ C5:  Raw line from source code.
 (0033)  CS-0x010  0x1A000         || SEI
 (0034)  CS-0x011  0x36100         || MOV R1,0x00   ;R1 is used to count interrupts and drive the LEDs
 (0035)                            || ;MOV R2,0x00   ;Set flag to allow interrupts to be enabled
-(0036)  CS-0x012  0x36201         || MOV R2, 0x01
+(0036)  CS-0x012  0x36281         || MOV R2, 0x81
 (0037)  CS-0x013  0x34260         || OUT R2, SSEG_CNTR_ID
 (0038)  CS-0x014  0x34180         || OUT  R1, SSEG_VAL_ID
 (0039)                            || 

@@ -33,7 +33,7 @@
 SEI
 MOV R1,0x00   ;R1 is used to count interrupts and drive the LEDs
 ;MOV R2,0x00   ;Set flag to allow interrupts to be enabled
-MOV R2, 0x01
+MOV R2, 0x81
 OUT R2, SSEG_CNTR_ID
 OUT  R1, SSEG_VAL_ID
 
