@@ -37,7 +37,8 @@ end clk_div;
 
 architecture my_clk_div of clk_div is
    constant MAX_COUNT_SLOW : integer := (10000000);  -- clock divider
-   constant MAX_COUNT_FAST : integer := (22000000);     -- clock divider 
+--   constant MAX_COUNT_FAST : integer := (22000000);  
+   constant MAX_COUNT_FAST : integer := (100); 
    signal tmp_clks : std_logic := '0'; 
    signal tmp_clkf : std_logic := '0'; 
 	
